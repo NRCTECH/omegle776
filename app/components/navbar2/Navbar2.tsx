@@ -12,7 +12,7 @@ const Navbar2 = () => {
   return ( 
     
     <header className='cursor-pointer mt-16 md:mt-24 items-center justify-between w-full bg-blue-300 h-auto md:h-14 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-16 items-center p-4'>
-      <link rel="canonical" href="https://omegle.online/gomeet/" />
+      
   <div className='flex flex-col md:flex-row md:flex-wrap md:justify-start'>
     <Link href={"/"} className="block md:inline-block mx-2 mb-2 md:mb-0"><Home /></Link>
     <Link href={""} className="block md:inline-block mx-2 mb-2 md:mb-0"><ChatList /></Link>
