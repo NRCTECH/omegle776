@@ -23,42 +23,27 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta charSet="UTF-8" />
         <meta
           name="description"
-          content="Gomeet is a free online video chat start instant video chat with any female user you want using the Gomeet application. Chat live for free with Go Meet Today."
+          content="Omegle.cm is a free online video chat start instant video chat with any female user you want using the Gomeet application. Chat live for free with Omegle.cm."
         />
         <meta
           name="keywords"
-          content="Gomeet, video chat, one-on-one chat, online chat, private chat, chat with strangers, go meet 1v1, gomeet video call, gomeet today, 1v1 meet"
+          content="Omegle.cm, Omegle, video chat, one-on-one chat, online chat, private chat, chat with strangers, chat 1v1, omegle video call, 1v1 meet"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="Gomeet" />
-        <meta property="og:title" content="Gomeet Today - Gomeet Video Call" />
+        <meta name="author" content="Omegle" />
+        <meta property="og:title" content="Omegle: Talk to strangers!" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://omegle.online/gomeet/" />
-        <meta
-          property="og:image"
-          content="https://omegle.online/img/gomeet.svg"
-        />
-        <meta property="og:site_name" content="Gomeet" />
+        <meta property="og:url" content="https://omegle-seven.vercel.app" />
+
+        <meta property="og:site_name" content="Omegle.cm" />
         <meta
           property="og:description"
-          content="Gomeet is a free online video chat start instant video chat with any female user you want using the Gomeet application. Chat live for free with Go Meet Today."
+          content="Omegle.cm is a free online video chat start instant video chat with any female user you want using the Gomeet application. Chat live for free with Omegle.cm."
         />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Gomeet Today - Gomeet Video Call" />
-        <meta
-          name="twitter:description"
-          content="Gomeet is a free online video chat start instant video chat with any female user you want using the Gomeet application. Chat live for free with Go Meet Today."
-        />
-        <meta name="twitter:image" content="https://omegle.online/img/gomeet.svg" />
+
         <link rel="canonical" href="https://omegle.online/gomeet/" />
         <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1d53a0" />
         <meta name="msapplication-TileColor" content="#1d53a0" />
         <meta name="theme-color" content="#1d53a0" />
       </Head>
