@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Navbar2 from "./components/navbar2/Navbar2";
@@ -9,11 +8,6 @@ import Footer from "./components/footer/Footer";
 import { Metadata } from "next";
 
 export default function Home() {
-
-  const router = useRouter();
-  const handleClick = () => {
-    router.push('/ftf')
-  }
 
 
 
