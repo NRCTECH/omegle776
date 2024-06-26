@@ -6,6 +6,9 @@ import Navbar2 from "../components/navbar2/Navbar2";
 import Footer from "../components/footer/Footer";
 import { useRouter } from "next/navigation"; // next/router kullan
 import { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 interface IBLogItem {
   _id: string;

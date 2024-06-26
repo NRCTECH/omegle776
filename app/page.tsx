@@ -6,6 +6,7 @@ import Navbar from "./components/navbar/Navbar";
 import Navbar2 from "./components/navbar2/Navbar2";
 import Footer from "./components/footer/Footer";
 import { Metadata } from "next";
+import { Inter } from "next/font/google";
 
 export default function Home() {
 
@@ -34,6 +35,8 @@ export default function Home() {
       </div>
     );
   };
+
+  const inter = Inter({ subsets: ["latin"] });
 
   const metadata: Metadata = {
     title: "Omegle - Omegle: Talk to strangers!",

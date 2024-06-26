@@ -4,6 +4,9 @@ import Navbar2 from "../components/navbar2/Navbar2";
 import Footer from "../components/footer/Footer";
 import Link from "next/link";
 import { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Chat with Girls - Omegle: Talk to strangers!",
