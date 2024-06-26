@@ -20,7 +20,7 @@ interface ICategoryItem {
   title: string;
 }
 export const metadata: Metadata = {
-  title: "About - Omegle: Talk to strangers!",
+  title: "Blogs - Omegle: Talk to strangers!",
   description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
   keywords: "Omegle, chat, meet new people, secure chat, online friends",
   robots: "index, follow",
@@ -111,7 +111,7 @@ const Page: React.FC = () => {
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
+        <meta property="og:image" content="https://omegle-seven.vercel.app/blog-img.webp" />
       </head>
 
     <div>
