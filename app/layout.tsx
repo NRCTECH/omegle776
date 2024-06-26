@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./Providers";
 import { Metadata } from "next";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      <Head>
 <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://omegle-seven.vercel.app" />
         <link rel="icon" href="/public/favicon/favicon.ico" />
@@ -33,7 +34,7 @@ export default function RootLayout({
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
         <meta property="og:image" content="https://omegle-seven.vercel.app/logo_1.webp" />
 
-      </head>
+      </Head>
       <body className={inter.className}>
         <AuthProvider>
           {children}

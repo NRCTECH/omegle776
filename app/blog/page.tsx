@@ -1,14 +1,11 @@
 // Page.tsx
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar/Navbar";
 import Navbar2 from "../components/navbar2/Navbar2";
 import Footer from "../components/footer/Footer";
-import { useRouter } from "next/navigation"; // next/router kullan
-import { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useRouter } from "next/navigation";
+import Head from "next/head";
 
 interface IBLogItem {
   _id: string;
@@ -22,13 +19,7 @@ interface ICategoryItem {
   _id: string;
   title: string;
 }
-export const metadata: Metadata = {
-  title: "Blogs - Omegle: Talk to strangers!",
-  description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
-  keywords: "Omegle, chat, meet new people, secure chat, online friends",
-  robots: "index, follow",
-  themeColor: "#ffffff",
-};
+
 
 const Page: React.FC = () => {
   const [blogs, setBlogs] = useState<IBLogItem[]>([]);
@@ -36,7 +27,6 @@ const Page: React.FC = () => {
   const blogsPerPage = 3;
   const [categories, setCategories] = useState<ICategoryItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -70,7 +60,6 @@ const Page: React.FC = () => {
         setBlogs(data);
       } catch (error) {
         console.error("Bloglar alınırken hata oluştu:", error);
-        // Hata yönetimi burada yapılabilir: kullanıcıya bir hata mesajı gösterilebilir veya tekrar denemesi için bir seçenek sunulabilir
       }
     };
     fetchBlogs();
@@ -101,135 +90,153 @@ const Page: React.FC = () => {
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  // Meta bilgileri için state tanımla
+  const [meta, setMeta] = useState({
+    title: "Blogs - Omegle: Talk to strangers!",
+    description: "Explore our latest blogs and stay informed.",
+    ogTitle: "Omegle.com - Omegle: Talk to strangers!",
+    ogDescription: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
+    ogImage: "https://omegle-seven.vercel.app/blog-img.webp",
+    ogUrl: "https://omegle-seven.vercel.app", // Sayfanın URL'sini buraya ekleyin
+  });
+
+  useEffect(() => {
+    // Meta bilgilerini sayfa yüklendiğinde veya selectedCategory değiştiğinde güncelle
+    setMeta((prevMeta) => ({
+      ...prevMeta,
+      title: selectedCategory ? `${selectedCategory} - Omegle: Talk to strangers!` : "Blogs - Omegle: Talk to strangers!",
+      description: selectedCategory ? `Explore ${selectedCategory} blogs and stay informed.` : "Explore our latest blogs and stay informed.",
+    }));
+  }, [selectedCategory]);
+
+
 
 
   return (
-
     <>
-      <head>
-        <link rel="manifest" href="/site.webmanifest" />
+      <Head>
+      <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta property="og:image" content="https://omegle-seven.vercel.app/blog-img.webp" />
-      </head>
+        <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
+      </Head>
 
-    <div>
-      <Navbar />
-      <Navbar2 />
+      <div>
+        <Navbar />
+        <Navbar2 />
 
-      <div className="flex flex-col items-center justify-between p-6 bg-blue-100 min-h-screen mt-0">
-        <div className="border-2 md:w-7/12 bg-opacity-30 bg-gray-300 shadow-inner-custom">
-          <img
-            src="blog-img.webp"
-            alt="Profile Picture"
-            className="w-full h-full object-cover rounded-md p-5"
-          />
+        <div className="flex flex-col items-center justify-between p-6 bg-blue-100 min-h-screen mt-0">
+          <div className="border-2 md:w-7/12 bg-opacity-30 bg-gray-300 shadow-inner-custom">
+            <img
+              src="blog-img.webp"
+              alt="Profile Picture"
+              className="w-full h-full object-cover rounded-md p-5"
+            />
 
-          <h1 className="text-2xl font-bold text-gray-800 mb-3 mt-9 text-center">
-            BLOGS
-          </h1>
-          <div className="flex flex-wrap space-x-4 justify-center underline">
-            {categories?.map((category) => (
-              <li
-                key={category._id}
-                className={`list-none cursor-pointer ${
-                  selectedCategory === category._id
-                    ? "font-bold text-blue-600 "
-                    : ""
-                }`}
-                onClick={() => handleCategoryClick(category._id)}
-              >
-                {category.title}
-              </li>
-            ))}
-          </div>
-
-          {selectedCategory ? (
-            <div className="mt-9 space-y-12 ml-7 mr-7 relative">
-              {currentBlogs.map((blog) => (
-                <div key={blog._id} className="space-y-4">
-                  <h1 className="text-xl font-bold mb-4">{blog.title}</h1>
-                  <div className="space-y-4">
-                    <img
-                      src={blog.image}
-                      alt={blog.title}
-                      className="w-4/6 mx-auto h-auto rounded-md"
-                    />
-                    <p className="flex-1">
-                      {blog.description.length > 600
-                        ? `${blog.description.slice(0, 300)}...`
-                        : blog.description}
-                    </p>
-                    {blog.description.length > 600 && (
-                      <button
-                        className="text-blue-600 mt-2 underline"
-                        onClick={() => handleReadMore(blog._id)}
-                      >
-                        Read more...
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="mt-9 space-y-12 ml-7 mr-7 relative">
-              {blogs.slice(indexOfFirstBlog, indexOfLastBlog).map((blog) => (
-                <div key={blog._id} className="space-y-4">
-                  <h1 className="text-xl font-bold mb-4">{blog.title}</h1>
-                  <div className="space-y-4">
-                    <img
-                      src={blog.image}
-                      alt={blog.title}
-                      className="w-4/6 mx-auto h-auto rounded-md"
-                    />
-                    <p className="flex-1">
-                      {blog.description.length > 600
-                        ? `${blog.description.slice(0, 300)}...`
-                        : blog.description}
-                    </p>
-                    {blog.description.length > 600 && (
-                      <button
-                        className="text-blue-600 mt-2 underline"
-                        onClick={() => handleReadMore(blog._id)}
-                      >
-                        Read more...
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Pagination */}
-          <div className="flex justify-center mt-6">
-            {Array.from(
-              { length: Math.ceil(filteredBlogs.length / blogsPerPage) },
-              (_, index) => (
-                <button
-                  key={index}
-                  className={`mb-2 mt-4 mx-1 px-3 py-1 rounded-xl focus:outline-none ${
-                    currentPage === index + 1
-                      ? "bg-blue-600 text-black font-bold hover:bg-blue-300 hover:text-black"
-                      : "bg-blue-400 text-black font-bold hover:bg-blue-500 hover:text-white"
+            <h1 className="text-2xl font-bold text-gray-800 mb-3 mt-9 text-center">
+              BLOGS
+            </h1>
+            <div className="flex flex-wrap space-x-4 justify-center underline">
+              {categories?.map((category) => (
+                <li
+                  key={category._id}
+                  className={`list-none cursor-pointer ${
+                    selectedCategory === category._id
+                      ? "font-bold text-blue-600 "
+                      : ""
                   }`}
-                  onClick={() => paginate(index + 1)}
+                  onClick={() => handleCategoryClick(category._id)}
                 >
-                  {index + 1}
-                </button>
-              )
+                  {category.title}
+                </li>
+              ))}
+            </div>
+
+            {selectedCategory ? (
+              <div className="mt-9 space-y-12 ml-7 mr-7 relative">
+                {currentBlogs.map((blog) => (
+                  <div key={blog._id} className="space-y-4">
+                    <h1 className="text-xl font-bold mb-4">{blog.title}</h1>
+                    <div className="space-y-4">
+                      <img
+                        src={blog.image}
+                        alt={blog.title}
+                        className="w-4/6 mx-auto h-auto rounded-md"
+                      />
+                      <p className="flex-1">
+                        {blog.description.length > 600
+                          ? `${blog.description.slice(0, 300)}...`
+                          : blog.description}
+                      </p>
+                      {blog.description.length > 600 && (
+                        <button
+                          className="text-blue-600 mt-2 underline"
+                          onClick={() => handleReadMore(blog._id)}
+                        >
+                          Read more...
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-9 space-y-12 ml-7 mr-7 relative">
+                {blogs.slice(indexOfFirstBlog, indexOfLastBlog).map((blog) => (
+                  <div key={blog._id} className="space-y-4">
+                    <h1 className="text-xl font-bold mb-4">{blog.title}</h1>
+                    <div className="space-y-4">
+                      <img
+                        src={blog.image}
+                        alt={blog.title}
+                        className="w-4/6 mx-auto h-auto rounded-md"
+                      />
+                      <p className="flex-1">
+                        {blog.description.length > 600
+                          ? `${blog.description.slice(0, 300)}...`
+                          : blog.description}
+                      </p>
+                      {blog.description.length > 600 && (
+                        <button
+                          className="text-blue-600 mt-2 underline"
+                          onClick={() => handleReadMore(blog._id)}
+                        >
+                          Read more...
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             )}
+
+            {/* Pagination */}
+            <div className="flex justify-center mt-6">
+              {Array.from(
+                { length: Math.ceil(filteredBlogs.length / blogsPerPage) },
+                (_, index) => (
+                  <button
+                    key={index}
+                    className={`mb-2 mt-4 mx-1 px-3 py-1 rounded-xl focus:outline-none ${
+                      currentPage === index + 1
+                        ? "bg-blue-600 text-black font-bold hover:bg-blue-300 hover:text-black"
+                        : "bg-blue-400 text-black font-bold hover:bg-blue-500 hover:text-white"
+                    }`}
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                )
+              )}
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-
-      <Footer />
-    </div>
     </>
   );
 };

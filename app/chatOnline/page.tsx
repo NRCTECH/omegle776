@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   themeColor: "#ffffff",
 };
 
-const page = () => {
+const Page: React.FC = () => {
 
   
   return (
@@ -74,4 +74,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

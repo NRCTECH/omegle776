@@ -1,14 +1,19 @@
-"use client";
+"use client"
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Navbar2 from "./components/navbar2/Navbar2";
 import Footer from "./components/footer/Footer";
-import { Metadata } from "next";
-import { Inter } from "next/font/google";
+import Head from "next/head";
 
 export default function Home() {
+
+  const router = useRouter();
+  const handleClick = () => {
+    router.push('/ftf')
+  }
 
 
 
@@ -36,27 +41,18 @@ export default function Home() {
     );
   };
 
-  const inter = Inter({ subsets: ["latin"] });
-
-  const metadata: Metadata = {
-    title: "Omegle - Omegle: Talk to strangers!",
-    description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
-    keywords: "Omegle, chat, meet new people, secure chat, online friends",
-    robots: "index, follow",
-    themeColor: "#ffffff",
-  };
 
   return (
     <>
-      <head>
+      <Head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta property="og:image" content="https://omegle-seven.vercel.app/home3.webp" />
-      </head>
+        <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
+      </Head>
 
 
     <div className="bg-orange-100  items-center flex flex-col  text-black text-center">
