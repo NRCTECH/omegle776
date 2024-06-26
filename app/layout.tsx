@@ -1,17 +1,10 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const metadata: Metadata = {
-  title: "Omegle - Omegle: Talk to strangers!",
-  description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
-  keywords: "Omegle, chat, meet new people, secure chat, online friends",
-  robots: "index, follow",
-  themeColor: "#ffffff",
-};
+
 
 export default function RootLayout({
   children,
@@ -21,8 +14,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        
+        <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
+        <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://omegle-seven.vercel.app" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/public/favicon/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
