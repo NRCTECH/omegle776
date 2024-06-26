@@ -19,9 +19,9 @@ const Page: React.FC = () => {
   return (
     <>
       <head>
-        <meta charSet="UTF-8" />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
+
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />

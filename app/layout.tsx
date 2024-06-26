@@ -21,11 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
-        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://omegle-seven.vercel.app" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
