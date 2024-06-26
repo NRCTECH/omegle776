@@ -19,7 +19,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <meta charSet="UTF-8" />
         <meta
           name="description"
@@ -35,18 +35,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta property="og:title" content="Omegle: Talk to strangers!" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
-
         <meta property="og:site_name" content="Omegle.cm" />
         <meta
           property="og:description"
           content="Omegle.cm is a free online video chat start instant video chat with any female user you want using the Gomeet application. Chat live for free with Omegle.cm."
         />
-
         <link rel="canonical" href="https://omegle.online/gomeet/" />
         <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
         <meta name="msapplication-TileColor" content="#1d53a0" />
         <meta name="theme-color" content="#1d53a0" />
-      </Head>
+      </head>
       <body className={inter.className}>
         <AuthProvider>
           {children}
