@@ -6,10 +6,7 @@ import { Metadata } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
 const metadata: Metadata = {
-  title: "Omegle - Omegle: Talk to strangers!",
-  description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
-  keywords: "Omegle, chat, meet new people, secure chat, online friends",
-  robots: "index, follow",
+ robots: "index, follow",
   themeColor: "#ffffff",
 };
 
@@ -22,10 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title content="Omegle - Talk to strangers!" />
-        <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
-        <meta name="robots" content="index, follow" />
+<meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://omegle-seven.vercel.app" />
         <link rel="icon" href="/public/favicon/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
