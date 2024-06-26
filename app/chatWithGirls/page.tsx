@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   themeColor: "#ffffff",
 };
 
-const Page: React.FC = () => {
+const page = () => {
   return (
 
 <>
@@ -31,10 +31,11 @@ const Page: React.FC = () => {
         <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
       </head>
 
-<div>
+
+<body className={inter.className}>
     <Navbar/>
     <Navbar2/>
-
+    <div>
 
     <div className="flex flex-col items-center p-6 bg-blue-100 min-h-screen ">
       <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom">
@@ -75,8 +76,10 @@ const Page: React.FC = () => {
     </div>
     <Footer/>
     </div>
+    </body>
+ 
     </>
   );
 };
 
-export default Page;
+export default page;
