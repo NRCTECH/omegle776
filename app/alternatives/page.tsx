@@ -2,9 +2,29 @@ import React from "react";
 import Navbar from "../components/navbar/Navbar";
 import Navbar2 from "../components/navbar2/Navbar2";
 import Footer from "../components/footer/Footer";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Alternatives - Omegle: Talk to strangers!",
+  description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
+  keywords: "Omegle, chat, meet new people, secure chat, online friends",
+  robots: "index, follow",
+  themeColor: "#ffffff",
+};
+
 
 const page = () => {
   return (
+    <>
+      <head>
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://omegle-seven.vercel.app" />
+        <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
+        <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
+      </head>
     
 <div>
 
@@ -46,6 +66,7 @@ const page = () => {
     </div>
     <Footer/>
     </div>
+    </>
   );
 };
 

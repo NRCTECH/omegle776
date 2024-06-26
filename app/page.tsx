@@ -52,7 +52,7 @@ export default function Home() {
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
+        <meta property="og:image" content="https://omegle-seven.vercel.app/home3.webp" />
       </head>
 
 
