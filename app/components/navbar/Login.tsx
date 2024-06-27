@@ -33,8 +33,8 @@ const Login = () => {
           </button>
         </div>
       ) : (
-        <div className="bg-orange-400 text-white font-bold py-1 px-3 w-26 h-10 rounded flex items-center justify-center">
-          <Link href={"/ftf"}>Log in</Link>
+        <div >
+          
         </div>
       )}
     </div>

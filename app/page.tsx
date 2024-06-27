@@ -7,6 +7,12 @@ import Navbar from "./components/navbar/Navbar";
 import Navbar2 from "./components/navbar2/Navbar2";
 import Footer from "./components/footer/Footer";
 import Head from "next/head";
+import Breadcrumb from "./components/breadCrumb/BreadCrumb";
+import { Metadata } from "next";
+import Faqs from "./components/home/Faqs";
+
+
+
 
 export default function Home() {
 
@@ -40,24 +46,83 @@ export default function Home() {
       </div>
     );
   };
+  const jsonLdWebSite = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Omegle",
+    "url": "https://omegle-seven.vercel.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://omegle-seven.vercel.app/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const jsonLdOrganization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Omegle",
+    "url": "https://omegle-seven.vercel.app",
+    "logo": "https://omegle-mu.vercel.app/static/logo.png",
+    "sameAs": [
+      "https://www.facebook.com/Omegle",
+      "https://twitter.com/Omegle",
+      "https://www.instagram.com/Omegle"
+    ]
+  };
+
+  const jsonLdWebPage = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Omegle: Talk to Strangers",
+    "description": "Omegle is just a great way to Video Chat with Girls, meet new people and have a fun time omegle people.",
+    "url": "https://omegle-seven.vercel.app"
+  };
+
+  const jsonLdBreadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://omegle-seven.vercel.app"
+      }
+    ]
+  };
 
 
   return (
     <>
-      <Head>
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://omegle-seven.vercel.app" />
-        <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
-        <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
-      </Head>
-
-
+    <div>
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+        />
+        
     <div className="bg-orange-100  items-center flex flex-col  text-black text-center">
       <Navbar/>
       <Navbar2/>
+      <div className="mt-4 relative w-full" >
+        <div className="absolute ml-8 text-left">
+          <Breadcrumb/>
+        </div>
+      
+      </div>
+      
       <div className="bg-white border-2 border-gray-400 sm:w-5/12 w-5/6 h-screen rounded-lg shadow-inner-custom overflow-y-auto relative mt-64 md:mt-16">
         <div className="text-left mt-7 ml-7 mr-6 mb-4 text-sm">
           You do not need an app to use Omegle on your phone or tablet! The web
@@ -184,29 +249,11 @@ export default function Home() {
       </div>
 
       <div className=" w-full bg-blue-100">
-      <div className="mt-16 mb-8 font-extrabold text-4xl">FAQs</div>
-      <div className="mt-4 bg-white border-2 w-7/12 shadow-inner rounded-lg text-left p-4 w-9/12 mx-auto">
-        <div className="ml-7">
-          <FAQItem
-            question="How is user safety ensured on this platform??"
-            answer="How is user safety ensured on this platform?"
-          />
-        </div>
-        <div className="ml-7 mb-4 mt-4">
-          <FAQItem
-            question="Can I use this platform on a global scale?"
-            answer="Can I use this platform on a global scale?"
-          />
-        </div>
-        <div className="ml-7 mb-4 mt-4">
-          <FAQItem
-            question="Is this platform free to use?"
-            answer="Yes, this platform is completely free. Engage in random video chats, connect with strangers, and enjoy the freedom of conversation without any subscription fees."
-          />
-        </div>
 
-        {/* Buraya daha fazla FAQItem ekleyebilirsiniz */}
-      </div>
+      <div className="mt-16 mb-8 font-extrabold text-4xl">FAQs</div>
+      <div className="max-w-screen-lg w-full mx-auto mb-8 md:mb-16">
+            <Faqs />
+          </div>
 
       <div className="font-extrabold text-4xl mb-9 mt-14">
         Talk to Strangers Right Now!
@@ -218,6 +265,7 @@ export default function Home() {
       </div>
       <Footer/>
       
+    </div>
     </div>
     </>
   );

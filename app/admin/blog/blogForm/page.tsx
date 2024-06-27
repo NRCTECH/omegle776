@@ -1,13 +1,18 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css'; // Quill stil dosyalarını dahil edin
+import { useRouter } from 'next/navigation';
 import AdminNavbar from '../../adminNavbar/AdminNavbar';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 interface ICategoryItem {
   _id: string;
   title: string;
 }
 
-const Page = () => {
+const BlogForm: React.FC = () => {
   const [categories, setCategories] = useState<ICategoryItem[]>([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -15,6 +20,7 @@ const Page = () => {
     description: '',
     image: '',
   });
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -31,7 +37,7 @@ const Page = () => {
     fetchCategories();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -42,13 +48,16 @@ const Page = () => {
       setFormData(prevState => ({
         ...prevState,
         image: reader.result as string,
-      }))
-    }
-    if(file){
+      }));
+    };
+    if (file) {
       reader.readAsDataURL(file);
     }
-  }
+  };
 
+  const handleDescriptionChange = (value: string) => {
+    setFormData({ ...formData, description: value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,15 +70,16 @@ const Page = () => {
       body: JSON.stringify(formData),
     });
 
-    setFormData({ title: '', category: '', description: '' , image: ''});
+    setFormData({ title: '', category: '', description: '', image: '' });
+    router.push('/admin/blogs'); // Form gönderildikten sonra yönlendirme
   };
 
   return (
-    <div className='flex flex-col items-center border-2 bg-blue-100 w-full mx-auto h-full'>
+    <div className='flex flex-col items-center bg-blue-100 w-full mx-auto h-full lg:h-screen p-4'>
       <AdminNavbar />
       <h1 className='text-2xl font-bold text-center my-14 mt-36'>Blog Ekle</h1>
-      <form onSubmit={handleSubmit} className='w-full max-w-lg flex flex-col items-center'>
-        <div className='w-full mb-4'>
+      <form onSubmit={handleSubmit} className='w-full max-w-2xl flex flex-col items-center space-y-4'>
+        <div className='w-full'>
           <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='title'>
             Blog Başlığı
           </label>
@@ -81,7 +91,7 @@ const Page = () => {
             onChange={handleChange}
           />
         </div>
-        <div className='w-full mb-4'>
+        <div className='w-full'>
           <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='category'>Kategori</label>
           <select
             name='category'
@@ -97,19 +107,20 @@ const Page = () => {
             ))}
           </select>
         </div>
-        <div className='w-full mb-4'>
+        <div className='w-full'>
           <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='description'>
             Blog Yazısı
           </label>
-          <textarea
-            name='description'
-            className='shadow appearance-none border rounded w-full py-2 px-5 h-52 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-y'
-            value={formData.description}
-            onChange={handleChange}
-          />
+          <div className='shadow appearance-none border rounded w-full h-52 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
+            <ReactQuill
+              value={formData.description}
+              onChange={handleDescriptionChange}
+              className='h-full'
+            />
+          </div>
         </div>
-        <div className='w-full mb-4'>
-          <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='image'>
+        <div className='w-full'>
+          <label className='block text-gray-700 text-sm font-bold mb-2 mt-9' htmlFor='image'>
             Resim Ekle
           </label>
           <input
@@ -128,6 +139,7 @@ const Page = () => {
       </form>
     </div>
   );
-}
+};
 
-export default Page;
+export default BlogForm;
+

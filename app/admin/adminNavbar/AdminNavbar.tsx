@@ -64,6 +64,9 @@ const AdminNavbar = () => {
                 </div>
 
                 <Link href={"/admin/adminRegister"} className='hover:bg-white cursor-pointer p-2 rounded-lg transition duration-300'>Admin Ekle</Link>
+                <Link href={"/admin/faq/faqList"} className='hover:bg-white cursor-pointer p-2 rounded-lg transition duration-300'>Faqs</Link>
+                <Link href={"/admin/faq/faqForm"} className='hover:bg-white cursor-pointer p-2 rounded-lg transition duration-300'>Faq Ekle</Link>
+
             </div>
             <Link href={"/"} className='hover:bg-red-600 cursor-pointer p-2 rounded-lg bg-red-500 transition duration-300 ml-auto'>Main Menu</Link>
         </div>

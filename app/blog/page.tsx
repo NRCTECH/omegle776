@@ -5,6 +5,7 @@ import Navbar from "../components/navbar/Navbar";
 import Navbar2 from "../components/navbar2/Navbar2";
 import Footer from "../components/footer/Footer";
 import { useRouter } from "next/navigation";
+import Breadcrumb from "../components/breadCrumb/BreadCrumb";
 import Head from "next/head";
 
 interface IBLogItem {
@@ -90,47 +91,100 @@ const Page: React.FC = () => {
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  // Meta bilgileri için state tanımla
-  const [meta, setMeta] = useState({
-    title: "Blogs - Omegle: Talk to strangers!",
-    description: "Explore our latest blogs and stay informed.",
-    ogTitle: "Omegle.com - Omegle: Talk to strangers!",
-    ogDescription: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
-    ogImage: "https://omegle-seven.vercel.app/blog-img.webp",
-    ogUrl: "https://omegle-seven.vercel.app", // Sayfanın URL'sini buraya ekleyin
-  });
-
-  useEffect(() => {
-    // Meta bilgilerini sayfa yüklendiğinde veya selectedCategory değiştiğinde güncelle
-    setMeta((prevMeta) => ({
-      ...prevMeta,
-      title: selectedCategory ? `${selectedCategory} - Omegle: Talk to strangers!` : "Blogs - Omegle: Talk to strangers!",
-      description: selectedCategory ? `Explore ${selectedCategory} blogs and stay informed.` : "Explore our latest blogs and stay informed.",
-    }));
-  }, [selectedCategory]);
-
-
-
-
+  const jsonLdWebSite = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Omegle",
+    "url": "https://omegle-seven.vercel.app/blog",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://omegle-seven.vercel.app/blog/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+  
+  const jsonLdOrganization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Omegle",
+    "url": "https://omegle-seven.vercel.app/blog",
+    "logo": "https://omegle-mu.vercel.app/static/logo.png",
+    "sameAs": [
+      "https://www.facebook.com/Omegle",
+      "https://twitter.com/Omegle",
+      "https://www.instagram.com/Omegle"
+    ]
+  };
+  
+  const jsonLdWebPage = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Omegle: Talk to Strangers",
+    "description": "Omegle is just a great way to Video Chat with Girls, meet new people and have a fun time omegle people.",
+    "url": "https://omegle-seven.vercel.app/blog"
+  };
+  
+  const jsonLdBreadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://omegle-seven.vercel.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://omegle-seven.vercel.app/blog"
+      }
+    ]
+  };
+  
+  
   return (
-    <>
-      <Head>
-      <link rel="manifest" href="/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
+    <div>
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://omegle-seven.vercel.app" />
-        <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
-        <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
+      <Head>
+        <title>Blog - Omegle: Talk to strangers!</title>
+        <meta name="description" content="Omegle is a great place to meet new friends..."/>
+        <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends"/>
+        <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!"/>
+        <meta property="og:description" content="Omegle is a great place to meet new friends..."/>
+        <meta property="og:image" content="https://omegle-seven.vercel.app/blog-img.webp"/>
+        {/* Diğer meta etiketleri buraya ekleyebilirsiniz */}
       </Head>
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+        />
 
       <div>
         <Navbar />
         <Navbar2 />
 
         <div className="flex flex-col items-center justify-between p-6 bg-blue-100 min-h-screen mt-0">
-          <div className="border-2 md:w-7/12 bg-opacity-30 bg-gray-300 shadow-inner-custom">
+        <div className="mt-4 relative w-full " >
+        <div className="absolute ml-8 text-left ">
+          <Breadcrumb/>
+        </div>
+      
+      </div>
+          <div className="border-2 md:w-7/12 bg-opacity-30 bg-gray-300 shadow-inner-custom ">
             <img
               src="blog-img.webp"
               alt="Profile Picture"
@@ -175,7 +229,7 @@ const Page: React.FC = () => {
                       {blog.description.length > 600 && (
                         <button
                           className="text-blue-600 mt-2 underline"
-                          onClick={() => handleReadMore(blog._id)}
+                          onClick={() => handleReadMore(blog.title)}
                         >
                           Read more...
                         </button>
@@ -203,7 +257,7 @@ const Page: React.FC = () => {
                       {blog.description.length > 600 && (
                         <button
                           className="text-blue-600 mt-2 underline"
-                          onClick={() => handleReadMore(blog._id)}
+                          onClick={() => handleReadMore(blog.title)}
                         >
                           Read more...
                         </button>
@@ -237,7 +291,7 @@ const Page: React.FC = () => {
         </div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 };
 

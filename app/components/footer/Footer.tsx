@@ -12,7 +12,7 @@ const Footer = () => {
     <div className="flex flex-wrap justify-center md:justify-end gap-4">
       <Link href="/terms" className="block md:inline-block hover:text-gray-600 underline">Terms and Conditions</Link>
       <Link href="/privacyPolicy" className="block md:inline-block hover:text-gray-600 underline">Privacy Policy</Link>
-      <Link href="/" className="block md:inline-block hover:text-gray-600 underline">Chat Sites</Link>
+      <Link href="/contact" className="block md:inline-block hover:text-gray-600 underline">Contact Us</Link>
     </div>
   </div>
 </div>

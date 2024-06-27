@@ -4,6 +4,8 @@ import Navbar2 from "../components/navbar2/Navbar2";
 import Footer from "../components/footer/Footer";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
+import Breadcrumb from "../components/breadCrumb/BreadCrumb";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,13 +14,63 @@ export const metadata: Metadata = {
   description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
   keywords: "Omegle, chat, meet new people, secure chat, online friends",
   robots: "index, follow",
-  themeColor: "#ffffff",
+};
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Omegle",
+  "url": "https://omegle-seven.vercel.app/about",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://omegle-seven.vercel.app/about/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const jsonLdOrganization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Omegle",
+  "url": "https://omegle-seven.vercel.app/about",
+  "logo": "https://omegle-mu.vercel.app/static/logo.png",
+  "sameAs": [
+    "https://www.facebook.com/Omegle",
+    "https://twitter.com/Omegle",
+    "https://www.instagram.com/Omegle"
+  ]
+};
+
+const jsonLdWebPage = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Omegle: Talk to Strangers",
+  "description": "Omegle is just a great way to Video Chat with Girls, meet new people and have a fun time omegle people.",
+  "url": "https://omegle-seven.vercel.app/about"
+};
+
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://omegle-seven.vercel.app"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": "https://omegle-seven.vercel.app/about"
+    }
+  ]
 };
 
 const Page: React.FC = () => {
   return (
     <>
-      <head>
+      <Head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
 
@@ -27,11 +79,34 @@ const Page: React.FC = () => {
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
         <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
-      </head>
-      <body className={inter.className}>
+      </Head>
+      
+      
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+        />
+
         <Navbar />
         <Navbar2 />
         <div className="flex flex-col items-center p-6 bg-blue-100 mt-0">
+        <div className="mt-4 relative w-full " >
+        <div className="absolute ml-8 text-left">
+          <Breadcrumb/>
+        </div>
+      </div>
           <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom">
             <img
               src="about.webp"
@@ -45,7 +120,6 @@ const Page: React.FC = () => {
           </div>
         </div>
         <Footer />
-      </body>
     </>
   );
 };

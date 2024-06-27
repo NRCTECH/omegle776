@@ -2,10 +2,81 @@ import React from "react";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 
+
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Omegle",
+  "url": "https://omegle-seven.vercel.app/terms",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://omegle-seven.vercel.app/terms/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const jsonLdOrganization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Omegle",
+  "url": "https://omegle-seven.vercel.app/terms",
+  "logo": "https://omegle-mu.vercel.app/static/logo.png",
+  "sameAs": [
+    "https://www.facebook.com/Omegle",
+    "https://twitter.com/Omegle",
+    "https://www.instagram.com/Omegle"
+  ]
+};
+
+const jsonLdWebPage = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Omegle: Talk to Strangers",
+  "description": "Omegle is just a great way to Video Chat with Girls, meet new people and have a fun time omegle people.",
+  "url": "https://omegle-seven.vercel.app/terms"
+};
+
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://omegle-seven.vercel.app"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Terms",
+      "item": "https://omegle-seven.vercel.app/terms"
+    }
+  ]
+};
+
 const page = () => {
   return (
     <div className="flex flex-col items-center p-6 bg-blue-100 min-h-screen mt-40">
       <Navbar/>
+
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+        />
+
       <div className="border-2 w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom">
         
         <h1 className="text-2xl font-bold text-gray-800 mb-3 mt-20 ml-14 text-left">WWW-OMEGLE.COM TERMS OF SERVICE</h1>
