@@ -5,8 +5,6 @@ import Navbar from '@/app/components/navbar/Navbar';
 import Navbar2 from '@/app/components/navbar2/Navbar2';
 import Footer from '@/app/components/footer/Footer';
 import Breadcrumb from '@/app/components/breadCrumb/BreadCrumb';
-import Faqs from '@/app/components/home/Faqs';
-
 interface IBlogItem {
   _id: string;
   title: string;
@@ -126,7 +124,7 @@ const Page: React.FC = () => {
           </div>
         </div>
         <div className="mt-4 ml-8">
-          <Breadcrumb />
+          <Breadcrumb category={selectedBlog?.category.title} title={selectedBlog?.title} />
         </div>
       </div>
       <div className="flex flex-col items-center p-6 bg-blue-100">

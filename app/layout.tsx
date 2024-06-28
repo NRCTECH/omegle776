@@ -6,13 +6,16 @@ import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
+
 export const metadata: Metadata = {
   title: "Omegle: Talk to strangers!",
   description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
   keywords: "Omegle, chat, meet new people, secure chat, online friends",
- robots: "index, follow",
+  robots: "index, follow",
+  icons: {
+    icon: '/favicon.png',
+  },
 };
-
 
 export default function RootLayout({
   children,
@@ -20,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-US">
            <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other."/>
