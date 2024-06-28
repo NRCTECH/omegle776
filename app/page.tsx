@@ -134,7 +134,7 @@ export default function Home() {
             
             <div className="relative w-64 h-fit bg-blue-400 opacity-85 p-4 rounded-lg shadow-lg text-white mt-3 ml-9">
             <div className="flex justify-left items-center space-x-4">
-              <h2 className="text-2xl font-bold">Contents</h2>
+              <h2 className="text-md font-bold">Contents</h2>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-white focus:outline-none hover:text-blue-600"

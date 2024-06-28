@@ -101,10 +101,10 @@ const Page: React.FC = () => {
       <Navbar />
       <Navbar2 />
       <div className="bg-blue-100">
-        <div className="top-20 left-10 mt-4 bg-blue-400 w-64 rounded-lg">
+        <div className="top-20 left-10 mt-4 bg-blue-400 w-64 rounded-lg ml-9">
           <div className="opacity-85 p-4 rounded-lg shadow-lg text-white">
             <div className="flex justify-left items-center space-x-4">
-              <h2 className="text-2xl font-bold">Contents</h2>
+              <h2 className="text-md font-bold">Contents</h2>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-white focus:outline-none hover:text-blue-600"
@@ -125,12 +125,12 @@ const Page: React.FC = () => {
             )}
           </div>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 ml-8">
           <Breadcrumb />
         </div>
       </div>
       <div className="flex flex-col items-center p-6 bg-blue-100">
-        <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom mt-16 p-4">
+        <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom mt-0 p-4">
           {selectedBlog?.image && (
             <img
               src={selectedBlog.image}
