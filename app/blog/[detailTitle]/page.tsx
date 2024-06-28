@@ -5,6 +5,8 @@ import Navbar from '@/app/components/navbar/Navbar';
 import Navbar2 from '@/app/components/navbar2/Navbar2';
 import Footer from '@/app/components/footer/Footer';
 import Breadcrumb from '@/app/components/breadCrumb/BreadCrumb';
+import 'react-quill/dist/quill.snow.css';
+
 interface IBlogItem {
   _id: string;
   title: string;
@@ -44,7 +46,7 @@ const Page: React.FC = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       const res = await fetch('/api/blogs');
-      const data = await res.json();
+      const data: IBlogItem[] = await res.json();
       setBlogs(data);
     };
 
@@ -68,11 +70,10 @@ const Page: React.FC = () => {
   useEffect(() => {
     const fetchFaqs = async () => {
       const res = await fetch('/api/faqs');
-      const data = await res.json();
-      const filteredFaqs = selectedBlog ? data.filter((faq: IFaqItem) => faq.blogId?.title === selectedBlog.title) : [];
+      const data: IFaqItem[] = await res.json();
+      const filteredFaqs = selectedBlog ? data.filter((faq) => faq.blogId?.title === selectedBlog.title) : [];
       setFaqs(filteredFaqs);
-      console.log(filteredFaqs)
-
+      console.log(filteredFaqs);
     };
 
     if (selectedBlog) {
@@ -143,8 +144,8 @@ const Page: React.FC = () => {
             {selectedBlog?.title}
           </h1>
           <span className='block text-xs pb-8 text-center items-center mt-2'>{selectedBlog?.category.title} {'>'} {selectedBlog?.title}</span>
-          <div className="text-black mb-4 ml-7 mr-4 mx-auto w-full">
-            <div dangerouslySetInnerHTML={{ __html: selectedBlog?.description || '' }} className="max-w-full" />
+          <div className="text-black mb-4 ml-7 mr-4 mx-auto w-full quill-content">
+            <div dangerouslySetInnerHTML={{ __html: selectedBlog?.description || '' }} className="quill-content max-w-full" />
           </div>
         </div>
       </div>

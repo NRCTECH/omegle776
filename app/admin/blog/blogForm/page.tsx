@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css'; // Quill stil dosyalarını dahil edin
@@ -12,9 +12,16 @@ interface ICategoryItem {
   title: string;
 }
 
+interface IFormData {
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+}
+
 const BlogForm: React.FC = () => {
   const [categories, setCategories] = useState<ICategoryItem[]>([]);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<IFormData>({
     title: '',
     category: '',
     description: '',
@@ -75,7 +82,7 @@ const BlogForm: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col items-center bg-blue-100 w-full mx-auto h-full lg:h-screen p-4'>
+    <div className='flex flex-col items-center bg-blue-100 w-full mx-auto h-full md:min-h-screen '>
       <AdminNavbar />
       <h1 className='text-2xl font-bold text-center my-14 mt-36'>Blog Ekle</h1>
       <form onSubmit={handleSubmit} className='w-full max-w-2xl flex flex-col items-center space-y-4'>
@@ -116,6 +123,16 @@ const BlogForm: React.FC = () => {
               value={formData.description}
               onChange={handleDescriptionChange}
               className='h-full'
+              theme="snow"
+              modules={{
+                toolbar: [
+                  [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                  ['bold', 'italic', 'underline'],
+                  ['link', 'image'],
+                  [{ 'align': [] }],
+                ]
+              }}
             />
           </div>
         </div>
@@ -142,4 +159,3 @@ const BlogForm: React.FC = () => {
 };
 
 export default BlogForm;
-

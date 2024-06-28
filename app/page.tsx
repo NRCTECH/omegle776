@@ -51,15 +51,31 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-   // Başlıkları toplamak ve id eklemek
-   const headingElements = Array.from(document.querySelectorAll('h1, h2, h3'));
-   const headingTexts = headingElements.map((heading, index) => {
-     const id = `heading-${index}`;
-     heading.id = id;
-     return { id, text: heading.textContent || '' };
-   });
-   setHeadings(headingTexts);
-  },[]);
+    // Başlıkları toplamak ve id eklemek
+    const headingElements = Array.from(document.querySelectorAll('h1, h2, h3'));
+    const headingTexts = headingElements.map((heading, index) => {
+      const id = `heading-${index}`;
+      heading.id = id;
+      return { id, text: heading.textContent || '' };
+    });
+    setHeadings(headingTexts);
+  }, []);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const yOffset = -100; // Navbar yüksekliği kadar ofset
+      const element = document.getElementById(window.location.hash.substring(1));
+      if (element) {
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
 
   const jsonLdWebSite = {
     "@context": "https://schema.org",
@@ -158,8 +174,6 @@ export default function Home() {
               <Breadcrumb />
             </div>
           </div>
-
-          
 
           <div className="bg-white border-2 border-gray-400 sm:w-5/12 w-5/6 h-screen rounded-lg shadow-inner-custom overflow-y-auto relative mt-64 md:mt-8">
             <div className="text-left mt-7 ml-7 mr-6 mb-4 text-sm">
