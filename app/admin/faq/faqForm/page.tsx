@@ -5,32 +5,40 @@ import { IFaq } from '@/models/Faq';
 import AdminNavbar from '../../adminNavbar/AdminNavbar';
 
 const FaqForm = () => {
+
+  interface IBlogItem {
+    _id: string;
+    title: string;
+  }
+  const [blogs, setBlogs] = useState<IBlogItem[]>([]);
   const [faqs, setFaqs] = useState<IFaq[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     question: '',
     answer: '',
+    blogId: '',
   });
 
   useEffect(() => {
-    const fetchFaqs = async () => {
+    const fetchBlogs = async () => {
       try {
-        const res = await fetch('/api/faqs');
+        const res = await fetch('/api/blogs');
         if (!res.ok) {
-          throw new Error('Verileri alma başarısız oldu');
+          throw new Error('Blogları alma başarısız oldu');
         }
         const data = await res.json();
-        setFaqs(data);
+        setBlogs(data);
       } catch (error: any) {
-        console.error('Verileri alırken hata oluştu:', error);
+        console.error('Blogları alırken hata oluştu:', error);
         setError(error.message);
       }
     };
 
-    fetchFaqs();
+    fetchBlogs();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -41,13 +49,20 @@ const FaqForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    const submitData = {
+      ...formData,
+      blogId: formData.blogId || undefined,
+    };
+
+
     try {
       const response = await fetch('/api/faqs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submitData),
       });
 
       if (!response.ok) {
@@ -57,7 +72,7 @@ const FaqForm = () => {
 
       const newFaq = await response.json();
       setFaqs((prevFaqs) => [...prevFaqs, newFaq]);
-      setFormData({ question: '', answer: '' });
+      setFormData({ question: '', answer: '' , blogId: ''});
     } catch (error: any) {
       setError(error.message || 'Bir hata oluştu');
     }
@@ -95,6 +110,22 @@ const FaqForm = () => {
               className="w-full p-2 border rounded-lg"
             />
           </div>
+
+          <div className="mb-4">
+            <label className="block mb-2 text-sm">Blog</label>
+            <select
+              name="blogId"
+              value={formData.blogId}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg"
+            >
+              <option value="">Blog seçin (opsiyonel)</option>
+              {blogs.map((blog) => (
+                <option key={blog._id} value={blog._id}>{blog.title}</option>
+              ))}
+            </select>
+          </div>
+
           <button
             type="submit"
             className="w-full bg-indigo-600 text-white py-3 px-6 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700"

@@ -1,8 +1,9 @@
+import CategoryModel from '@/models/Category';
 // api/blog.ts
 
 import connectMongo from '../../lib/connectDb';
 import { NextApiRequest, NextApiResponse } from 'next';
-import Blog from '../../models/Blog';
+import Blog, { IBlog } from '../../models/Blog';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     await connectMongo();
@@ -18,8 +19,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(500).json({ error: 'Blog eklenemedi' });
       }
     } else if (req.method === 'GET') {
+      const { category } = req.query;
+
       try {
-        const blogs = await Blog.find({});
+        let blogs : IBlog[];
+        if (category) {
+          const categoryDoc = await CategoryModel.findOne({ name: category });
+          if (categoryDoc) {
+            blogs = await Blog.find({ category: categoryDoc._id }).populate('category');
+          } else {
+            blogs = [];
+          }
+        } else {
+          blogs = await Blog.find({}).populate('category');
+        }
         res.status(200).json(blogs);
       } catch (error) {
         res.status(500).json({ error: 'Bloglar alınamadı' });

@@ -56,6 +56,7 @@ const AdminNavbar = () => {
                     </button>
                     {isOpen && (
                         <div className='absolute mt-2 w-48 bg-white shadow-lg rounded-lg'>
+                            <Link href={"/admin/blog/allblogs"} className='block px-4 py-2 hover:bg-gray-200 cursor-pointer rounded-t-lg transition duration-300'>Bloglar</Link>
                             <Link href={"/admin/blog/blogForm"} className='block px-4 py-2 hover:bg-gray-200 cursor-pointer rounded-t-lg transition duration-300'>Blog Ekle</Link>
                             <Link href={"/admin/blog/deleteBlog"} className='block px-4 py-2 hover:bg-gray-200 cursor-pointer transition duration-300'>Blog Sil</Link>
                             <Link href={"/admin/blog/updateBlog"} className='block px-4 py-2 hover:bg-gray-200 cursor-pointer rounded-b-lg transition duration-300'>Blog Guncelle</Link>

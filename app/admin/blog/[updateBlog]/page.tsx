@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css'; // Quill stil dosyalarını dahil edin
-import { useRouter } from 'next/navigation';
+import 'react-quill/dist/quill.snow.css';
+import { useParams, useRouter } from 'next/navigation';
 import AdminNavbar from '../../adminNavbar/AdminNavbar';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -12,15 +12,38 @@ interface ICategoryItem {
   title: string;
 }
 
-const BlogForm: React.FC = () => {
+interface IBlogItem {
+  _id: string;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+}
+
+const UpdateBlogForm: React.FC = () => {
   const [categories, setCategories] = useState<ICategoryItem[]>([]);
+  const [blogs, setBlogs] = useState<IBlogItem[]>([]);
+  const [selectedBlog, setSelectedBlog] = useState<IBlogItem | null>(null);
   const [formData, setFormData] = useState({
     title: '',
     category: '',
     description: '',
     image: '',
   });
+
   const router = useRouter();
+  const params = useParams();
+  const blogId = params?.updateBlog;
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const res = await fetch('/api/blogs');
+      const data = await res.json();
+      setBlogs(data);
+    };
+
+    fetchBlogs();
+  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -37,8 +60,41 @@ const BlogForm: React.FC = () => {
     fetchCategories();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  useEffect(() => {
+    if (blogs.length > 0) {
+      const blog = blogs.find((blog) => blog._id === blogId) || null;
+      setSelectedBlog(blog);
+    }
+  }, [blogId, blogs]);
+
+  useEffect(() => {
+    if (selectedBlog) {
+      setFormData({
+        title: selectedBlog.title,
+        description: selectedBlog.description,
+        image: selectedBlog.image,
+        category: typeof selectedBlog.category === 'string' ? selectedBlog.category : (selectedBlog.category as any)._id,
+      });
+
+      console.log("Selected Blog:", selectedBlog);
+      console.log("Form Data after setting:", {
+        title: selectedBlog.title,
+        description: selectedBlog.description,
+        image: selectedBlog.image,
+        category: typeof selectedBlog.category === 'string' ? selectedBlog.category : (selectedBlog.category as any)._id,
+      });
+    }
+  }, [selectedBlog]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    console.log(`Form Data after ${name} change:`, { ...formData, [name]: value });
+  };
+
+  const handleDescriptionChange = (value: string) => {
+    setFormData(prevFormData => ({ ...prevFormData, description: value }));
+    console.log("Form Data after description change:", { ...formData, description: value });
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,35 +105,36 @@ const BlogForm: React.FC = () => {
         ...prevState,
         image: reader.result as string,
       }));
+      console.log("Form Data after image change:", {
+        ...formData,
+        image: reader.result as string,
+      });
     };
     if (file) {
       reader.readAsDataURL(file);
     }
   };
 
-  const handleDescriptionChange = (value: string) => {
-    setFormData({ ...formData, description: value });
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await fetch('/api/blogs', {
-      method: 'POST',
+    await fetch(`/api/blogs/${blogId}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ ...formData }),
     });
 
     setFormData({ title: '', category: '', description: '', image: '' });
-    router.push('/admin'); // Form gönderildikten sonra yönlendirme
+    router.push('/admin');
   };
+
 
   return (
     <div className='flex flex-col items-center bg-blue-100 w-full mx-auto h-full lg:h-screen p-4'>
       <AdminNavbar />
-      <h1 className='text-2xl font-bold text-center my-14 mt-36'>Blog Ekle</h1>
+      <h1 className='text-2xl font-bold text-center my-14 mt-36'>Blog Güncelle</h1>
       <form onSubmit={handleSubmit} className='w-full max-w-2xl flex flex-col items-center space-y-4'>
         <div className='w-full'>
           <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='title'>
@@ -88,7 +145,7 @@ const BlogForm: React.FC = () => {
             type='text'
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             value={formData.title}
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
         </div>
         <div className='w-full'>
@@ -96,7 +153,7 @@ const BlogForm: React.FC = () => {
           <select
             name='category'
             value={formData.category}
-            onChange={handleChange}
+            onChange={handleInputChange}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           >
             <option value="">Kategori Seç</option>
@@ -134,12 +191,11 @@ const BlogForm: React.FC = () => {
           type='submit'
           className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-7 mb-64'
         >
-          Gönder
+          Güncelle
         </button>
       </form>
     </div>
   );
 };
 
-export default BlogForm;
-
+export default UpdateBlogForm;

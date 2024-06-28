@@ -6,6 +6,7 @@ const Faqs = () => {
     _id: string;
     question: string;
     answer: string;
+    blogId?: string;
   }
 
   const [faqs, setFaqs] = useState<IFaqItem[]>([]);
@@ -15,7 +16,8 @@ const Faqs = () => {
     const fetchFaqs = async () => {
       const res = await fetch('/api/faqs');
       const data = await res.json();
-      setFaqs(data);
+      const filteredFaqs = data.filter((faq: IFaqItem) => !faq.blogId);
+      setFaqs(filteredFaqs);
     };
 
     fetchFaqs();

@@ -1,5 +1,4 @@
-// Page.tsx
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar/Navbar";
 import Navbar2 from "../components/navbar2/Navbar2";
@@ -8,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Breadcrumb from "../components/breadCrumb/BreadCrumb";
 import Head from "next/head";
 
-interface IBLogItem {
+interface IBlogItem {
   _id: string;
   title: string;
   category: string;
@@ -21,9 +20,8 @@ interface ICategoryItem {
   title: string;
 }
 
-
 const Page: React.FC = () => {
-  const [blogs, setBlogs] = useState<IBLogItem[]>([]);
+  const [blogs, setBlogs] = useState<IBlogItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 3;
   const [categories, setCategories] = useState<ICategoryItem[]>([]);
@@ -66,8 +64,8 @@ const Page: React.FC = () => {
     fetchBlogs();
   }, []);
 
-  const handleReadMore = (id: string) => {
-    router.push(`/blog/${id}`);
+  const handleReadMore = (title: string) => {
+    router.push(`/blog/${title}`);
   };
 
   const handleCategoryClick = (categoryId: string) => {
@@ -142,11 +140,9 @@ const Page: React.FC = () => {
       }
     ]
   };
-  
-  
+
   return (
     <div>
-
       <Head>
         <title>Blog - Omegle: Talk to strangers!</title>
         <meta name="description" content="Omegle is a great place to meet new friends..."/>
@@ -154,36 +150,33 @@ const Page: React.FC = () => {
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!"/>
         <meta property="og:description" content="Omegle is a great place to meet new friends..."/>
         <meta property="og:image" content="https://omegle-seven.vercel.app/blog-img.webp"/>
-        {/* Diğer meta etiketleri buraya ekleyebilirsiniz */}
       </Head>
       <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
-        />
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
 
       <div>
         <Navbar />
         <Navbar2 />
-
         <div className="flex flex-col items-center justify-between p-6 bg-blue-100 min-h-screen mt-0">
-        <div className="mt-4 relative w-full " >
-        <div className="absolute ml-8 text-left ">
-          <Breadcrumb/>
-        </div>
-      
-      </div>
+          <div className="mt-4 relative w-full">
+            <div className="absolute ml-8 text-left">
+              <Breadcrumb />
+            </div>
+          </div>
           <div className="border-2 md:w-7/12 bg-opacity-30 bg-gray-300 shadow-inner-custom ">
             <img
               src="blog-img.webp"
@@ -210,65 +203,38 @@ const Page: React.FC = () => {
               ))}
             </div>
 
-            {selectedCategory ? (
-              <div className="mt-9 space-y-12 ml-7 mr-7 relative">
-                {currentBlogs.map((blog) => (
-                  <div key={blog._id} className="space-y-4">
-                    <h1 className="text-xl font-bold mb-4">{blog.title}</h1>
-                    <div className="space-y-4">
-                      <img
-                        src={blog.image}
-                        alt={blog.title}
-                        className="w-4/6 mx-auto h-auto rounded-md"
+            <div className="mt-9 space-y-12 ml-7 mr-7 relative">
+              {currentBlogs.map((blog) => (
+                <div key={blog._id} className="space-y-4">
+                  <h1 className="text-xl font-bold mb-4">{blog.title}</h1>
+                  <div className="space-y-4">
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      className="w-4/6 mx-auto h-auto rounded-md"
+                    />
+                    <div className="flex-1">
+                      <div
+                        className="text-black"
+                        dangerouslySetInnerHTML={{
+                          __html: blog.description.length > 400
+                            ? `${blog.description.slice(0, 400)}...`
+                            : blog.description,
+                        }}
                       />
-                      <p className="flex-1">
-                        {blog.description.length > 600
-                          ? `${blog.description.slice(0, 300)}...`
-                          : blog.description}
-                      </p>
-                      {blog.description.length > 600 && (
-                        <button
-                          className="text-blue-600 mt-2 underline"
-                          onClick={() => handleReadMore(blog.title)}
-                        >
-                          Read more...
-                        </button>
-                      )}
+                      <button
+                        className="text-blue-600 mt-2 underline"
+                        onClick={() => handleReadMore(blog.title)}
+                      >
+                        Devamını oku...
+                      </button>
                     </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <div className="mt-9 space-y-12 ml-7 mr-7 relative">
-                {blogs.slice(indexOfFirstBlog, indexOfLastBlog).map((blog) => (
-                  <div key={blog._id} className="space-y-4">
-                    <h1 className="text-xl font-bold mb-4">{blog.title}</h1>
-                    <div className="space-y-4">
-                      <img
-                        src={blog.image}
-                        alt={blog.title}
-                        className="w-4/6 mx-auto h-auto rounded-md"
-                      />
-                      <p className="flex-1">
-                        {blog.description.length > 600
-                          ? `${blog.description.slice(0, 300)}...`
-                          : blog.description}
-                      </p>
-                      {blog.description.length > 600 && (
-                        <button
-                          className="text-blue-600 mt-2 underline"
-                          onClick={() => handleReadMore(blog.title)}
-                        >
-                          Read more...
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                </div>
+              ))}
+            </div>
 
-            {/* Pagination */}
+            {/* Sayfalandırma */}
             <div className="flex justify-center mt-6">
               {Array.from(
                 { length: Math.ceil(filteredBlogs.length / blogsPerPage) },
