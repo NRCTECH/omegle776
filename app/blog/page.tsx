@@ -6,11 +6,12 @@ import Footer from "../components/footer/Footer";
 import { useRouter } from "next/navigation";
 import Breadcrumb from "../components/breadCrumb/BreadCrumb";
 import Head from "next/head";
+import Link from "next/link";
 
 interface IBlogItem {
   _id: string;
   title: string;
-  category: string;
+  category: {_id: string, title: string};
   description: string;
   image: string;
 }
@@ -68,8 +69,8 @@ const Page: React.FC = () => {
     router.push(`/blog/${title}`);
   };
 
-  const handleCategoryClick = (categoryId: string) => {
-    setSelectedCategory(categoryId);
+  const handleCategoryClick = (category: string | null) => {
+    setSelectedCategory(category);
     setCurrentPage(1); // Kategori değiştiğinde sayfayı 1'e ayarla
   };
 
@@ -80,7 +81,7 @@ const Page: React.FC = () => {
 
   // Filter blogs based on selected category
   const filteredBlogs = selectedCategory
-    ? blogs.filter((blog) => blog.category === selectedCategory)
+    ? blogs.filter((blog) => blog.category.title === selectedCategory)
     : blogs;
 
   // Slice blogs array to get blogs for the current page
@@ -192,11 +193,11 @@ const Page: React.FC = () => {
                 <li
                   key={category._id}
                   className={`list-none cursor-pointer ${
-                    selectedCategory === category._id
+                    selectedCategory === category.title
                       ? "font-bold text-blue-600 "
                       : ""
                   }`}
-                  onClick={() => handleCategoryClick(category._id)}
+                  onClick={() => handleCategoryClick(category.title)}
                 >
                   {category.title}
                 </li>
@@ -206,7 +207,7 @@ const Page: React.FC = () => {
             <div className="mt-9 space-y-12 ml-7 mr-7 relative">
               {currentBlogs.map((blog) => (
                 <div key={blog._id} className="space-y-4">
-                  <h1 className="text-xl font-bold mb-4">{blog.title}</h1>
+                 <button onClick={() => handleReadMore(blog.title)}><h1 className="text-xl font-bold mb-4">{blog.title}</h1></button>
                   <div className="space-y-4">
                     <img
                       src={blog.image}
@@ -217,8 +218,8 @@ const Page: React.FC = () => {
                       <div
                         className="text-black"
                         dangerouslySetInnerHTML={{
-                          __html: blog.description.length > 400
-                            ? `${blog.description.slice(0, 400)}...`
+                          __html: blog.description.length > 1500
+                            ? `${blog.description.slice(0, 1400)}...`
                             : blog.description,
                         }}
                       />
