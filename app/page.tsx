@@ -269,7 +269,7 @@ export default function Home() {
           </div>
 
           <div className="w-full bg-blue-100">
-            <div className="mt-16 mb-8 font-extrabold text-4xl">FAQs</div>
+            <h1 className="mt-16 mb-8 font-extrabold text-4xl">FAQs</h1>
             <div className="max-w-screen-lg w-full mx-auto mb-8 md:mb-16">
               <Faqs />
             </div>
