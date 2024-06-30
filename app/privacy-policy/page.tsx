@@ -31,10 +31,10 @@ const PrivacyPolicy: React.FC = () => {
 
     return (
         <div>
-            <Head>
-                <title>Privacy Policy - Omegle</title>
+            <head>
+                <title>Privacy Policy - Omegle: Talk to strangers!</title>
                 <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-            </Head>
+            </head>
             <div className="pt-4">
                 <div className="fixed top-0 w-full z-10">
                     <Navbar />

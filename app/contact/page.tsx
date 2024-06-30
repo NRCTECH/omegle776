@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import Navbar from "../components/navbar/Navbar";
 import Navbar2 from "../components/navbar2/Navbar2";
@@ -8,6 +8,9 @@ import Breadcrumb from "../components/breadCrumb/BreadCrumb";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
+
+
+
 
 const jsonLdWebSite = {
   "@context": "https://schema.org",
@@ -61,6 +64,7 @@ const jsonLdBreadcrumb = {
   ]
 };
 
+
 const Page: React.FC = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
@@ -77,16 +81,18 @@ const Page: React.FC = () => {
     setEmail("");
   };
 
+
   return (
-    <div>
-      <Head>
-        <title>Contact - Omegle: Talk to strangers!</title>
+    <>
+      <head>
+        <title>Contact Us - Omegle: Talk to strangers!</title>
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="description" content="Omegle is a great place to meet new friends..." />
         <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends..." />
         <meta property="og:image" content="https://omegle-seven.vercel.app/blog-img.webp" />
-      </Head>
+      </head>
 
       <script
         type="application/ld+json"
@@ -182,7 +188,7 @@ const Page: React.FC = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

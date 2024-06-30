@@ -5,8 +5,6 @@ import Navbar2 from "../components/navbar2/Navbar2";
 import Footer from "../components/footer/Footer";
 import { useRouter } from "next/navigation";
 import Breadcrumb from "../components/breadCrumb/BreadCrumb";
-import Head from "next/head";
-import Link from "next/link";
 
 interface IBlogItem {
   _id: string;
@@ -97,29 +95,7 @@ const Page: React.FC = () => {
 
   return (
     <div>
-      <Head>
-        <title>Blog - Omegle: Talk to strangers!</title>
-        <meta
-          name="description"
-          content="Omegle is a great place to meet new friends..."
-        />
-        <meta
-          name="keywords"
-          content="Omegle, chat, meet new people, secure chat, online friends"
-        />
-        <meta
-          property="og:title"
-          content="Omegle.com - Omegle: Talk to strangers!"
-        />
-        <meta
-          property="og:description"
-          content="Omegle is a great place to meet new friends..."
-        />
-        <meta
-          property="og:image"
-          content="https://omegle-seven.vercel.app/blog-img.webp"
-        />
-      </Head>
+
 
       <div>
         <Navbar />

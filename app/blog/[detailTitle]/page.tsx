@@ -1,11 +1,10 @@
-"use client";
-import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import React from 'react';
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import Navbar from '@/app/components/navbar/Navbar';
 import Navbar2 from '@/app/components/navbar2/Navbar2';
 import Footer from '@/app/components/footer/Footer';
 import Breadcrumb from '@/app/components/breadCrumb/BreadCrumb';
-import 'react-quill/dist/quill.snow.css';
 
 interface IBlogItem {
   _id: string;
@@ -24,172 +23,124 @@ interface IFaqItem {
   blogId?: { _id: string; title: string };
 }
 
-const Page: React.FC = () => {
-  const [faqs, setFaqs] = useState<IFaqItem[]>([]);
-  const [openIndex, setOpenIndex] = useState<string | null>(null);
-  const [blogs, setBlogs] = useState<IBlogItem[]>([]);
-  const [selectedBlog, setSelectedBlog] = useState<IBlogItem | null>(null);
-  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
+interface JsonLdScripts {
+  website: object;
+  organization: object;
+  webPage: object;
+  breadcrumb: object;
+}
 
-  const router = useRouter();
-  const params = useParams();
-  const detailTitle = Array.isArray(params?.detailTitle) ? params.detailTitle[0] : params?.detailTitle || '';
-  const decodedTitle = decodeURIComponent(detailTitle.replace(/-/g, ' '));
+interface PageProps {
+  blog: IBlogItem;
+  faqs: IFaqItem[];
+  jsonLdScripts: JsonLdScripts;
+}
 
-  const formatTitleForURL = (title: string): string => {
-    return encodeURIComponent(
-      title.toLowerCase().replace(/ /g, '-').replace(/\./g, '-')
-    );
-  };
-
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      const res = await fetch('/api/blogs');
-      const data: IBlogItem[] = await res.json();
-      setBlogs(data);
-    };
-
-    fetchBlogs();
-  }, []);
-
-  useEffect(() => {
-    if (blogs.length > 0) {
-      const blog = blogs.find((blog) => blog.title.toLowerCase() === decodedTitle.toLowerCase()) || null;
-      setSelectedBlog(blog);
-    }
-  }, [decodedTitle, blogs]);
-
-  useEffect(() => {
-    if (selectedBlog) {
-      const formattedTitle = formatTitleForURL(selectedBlog.title);
-      router.replace(`/blog/${formattedTitle}`);
-    }
-  }, [selectedBlog, router]);
-
-  useEffect(() => {
-    const fetchFaqs = async () => {
-      const res = await fetch('/api/faqs');
-      const data: IFaqItem[] = await res.json();
-      const filteredFaqs = selectedBlog ? data.filter((faq) => faq.blogId?.title === selectedBlog.title) : [];
-      setFaqs(filteredFaqs);
-    };
-
-    if (selectedBlog) {
-      fetchFaqs();
-    }
-  }, [selectedBlog]);
-
-  useEffect(() => {
-    const headingElements = Array.from(document.querySelectorAll('h1, h2, h3'));
-    const headingTexts = headingElements.map((heading, index) => {
-      const id = `heading-${index}`;
-      heading.id = id;
-      return { id, text: heading.textContent || '' };
-    });
-    setHeadings(headingTexts);
-  }, [selectedBlog]);
-
-  const toggleFaq = (id: string) => {
-    setOpenIndex(openIndex === id ? null : id);
-  };
-
+const Page: React.FC<PageProps> = ({ blog, faqs, jsonLdScripts }) => {
   return (
     <div className='bg-stone-300'>
+      <Head>
+        <title>{blog.title}</title>
+        <meta name="description" content={blog.description} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdScripts.website) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdScripts.organization) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdScripts.webPage) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdScripts.breadcrumb) }} />
+      </Head>
       <Navbar />
       <Navbar2 />
-      <div className="bg-stone-300 flex flex-col items-center">
-        <div className="w-full flex justify-center items-start mt-4 relative">
-          <div className="absolute left-0 ml-8">
-            <Breadcrumb category={selectedBlog?.category.title} title={selectedBlog?.title} />
-          </div>
-          <div className="bg-gray-700 w-64 rounded-lg">
-            <div className="opacity-100 p-4 rounded-lg shadow-lg text-white">
-              <div className="flex justify-left items-center space-x-4">
-                <h2 className="text-md font-bold">Contents</h2>
-                <button
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="text-white focus:outline-none hover:text-blue-600"
-                >
-                  {isOpen ? "[ close ]" : "[ open ]"}
-                </button>
-              </div>
-              {isOpen && (
-                <ul className="mt-4 space-y-1">
-                  {headings.map((content) => (
-                    <li key={content.id} className="text-xs">
-                      <a href={`#${content.id}`} className="text-white hover:text-blue-600 transition duration-300">
-                        {content.text}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
+      <Breadcrumb category={blog.category.title} title={blog.title} />
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold my-8">{blog.title}</h1>
+        <img src={blog.image} alt={blog.title} className="w-full h-auto rounded shadow-md mb-8" />
+        <p>{new Date(blog.createdAt).toLocaleDateString()}</p>
+        <div dangerouslySetInnerHTML={{ __html: blog.description }} />
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">FAQs</h2>
+          {faqs.map((faq) => (
+            <div key={faq._id} className="mb-4 p-4 rounded bg-white shadow">
+              <h3 className="font-semibold">{faq.question}</h3>
+              <p>{faq.answer}</p>
             </div>
-          </div>
+          ))}
         </div>
-        <div className="flex flex-col items-center p-6 bg-stone-300">
-          <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom mt-0 p-4">
-            {selectedBlog?.image && (
-              <img
-                src={selectedBlog.image}
-                alt={selectedBlog.title}
-                className="w-auto h-auto mx-auto object-cover mt-4 p-5 shadow-inner-custom"
-              />
-            )}
-            <h1 className="text-xs font-bold text-black mb-3 mt-9 text-left ml-7">
-              {selectedBlog?.createdAt ? new Date(selectedBlog.createdAt).toLocaleDateString() : ''}
-            </h1>
-            <h1 id="title" className="text-2xl font-bold text-black mb-0 mt-9 text-center">
-              {selectedBlog?.title}
-            </h1>
-            <span className='block text-xs pb-8 text-center items-center mt-2'>{selectedBlog?.category.title} {'>'} {selectedBlog?.title}</span>
-            <div className="text-black mb-4 ml-7 mr-4 mx-auto w-full quill-content">
-              <div dangerouslySetInnerHTML={{ __html: selectedBlog?.description || '' }} className="quill-content max-w-full" />
-            </div>
-          </div>
-        </div>
-        <div className="bg-stone-300 max-w-screen-lg w-full mx-auto mb-8 md:mb-16">
-          <div className="mt-12">
-            <h2 className="text-3xl flex justify-center font-bold mb-4 text-black">FAQs</h2>
-            <div>
-              {faqs.map((item) => (
-                <div key={item._id} className="py-2">
-                  <button
-                    className="flex items-center justify-between w-full py-2 px-4 text-left bg-white rounded-t-lg shadow-lg focus:outline-none focus:ring focus:ring-black"
-                    onClick={() => toggleFaq(item._id)}
-                  >
-                    <span className="text-xl font-semibold">{item.question}</span>
-                    <svg
-                      className="w-6 h-6 text-gray-600 transform transition-transform"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      style={{ transform: openIndex === item._id ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                    >
-                      <path
-                        d="M5 15l7-7 7 7"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                  {openIndex === item._id && (
-                    <div className="flex items-center justify-between w-full py-2 px-4 text-left font-bold rounded-b-lg shadow-lg">
-                      <p>{item.answer}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
+  const blogId = params?.id;  // URL'den blog ID'si alınıyor.
+
+  // API'den blog bilgilerini çekme
+  const blogRes = await fetch(`https://example.com/api/blogs/${blogId}`);
+  const blog = await blogRes.json();
+
+  // API'den blog'a ait FAQs bilgilerini çekme
+  const faqsRes = await fetch(`https://example.com/api/faqs?blogId=${blogId}`);
+  const faqs = await faqsRes.json();
+
+  // JSON-LD yapılandırılmış veri betikleri oluşturma
+  const jsonLdScripts = {
+    website: {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": blog.title,
+      "url": `https://your-website.com/blog/${blogId}`,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `https://your-website.com/search?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    },
+    organization: {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Your Organization Name",
+      "url": "https://your-website.com",
+      "logo": "https://your-website.com/logo.png",
+      "sameAs": [
+        "https://www.facebook.com/your-page",
+        "https://twitter.com/your-page",
+        "https://www.instagram.com/your-page"
+      ]
+    },
+    webPage: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": blog.title,
+      "description": blog.description,
+      "url": `https://your-website.com/blog/${blogId}`
+    },
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://your-website.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": `https://your-website.com/blog/${blogId}`
+        }
+      ]
+    }
+  };
+
+  return {
+    props: {
+      blog,
+      faqs,
+      jsonLdScripts
+    }
+  };
 };
 
 export default Page;
