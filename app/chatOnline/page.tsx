@@ -108,7 +108,7 @@ const Page: React.FC = () => {
 
 
     
-    <div className="flex flex-col items-center p-6 bg-blue-100 mt-0  ">
+    <div className="flex flex-col items-center p-6 bg-stone-300 mt-0  ">
 
     <div className="mt-4 relative w-full mb-4" >
         <div className="absolute ml-8 text-left">
@@ -118,7 +118,7 @@ const Page: React.FC = () => {
       </div>
 
 
-      <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom mt-7 ">
+      <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom mt-7 ">
         <img
           src="chatonline.webp"
           alt="Profile Picture"
@@ -129,7 +129,7 @@ const Page: React.FC = () => {
             <Link href={"/ftf"}>Start Video Chat</Link>
         </button> 
 
-        <p className="text-gray-600 mb-4 mx-14 mt-5">
+        <p className="text-black mb-4 mx-14 mt-5">
         Connect with new friends online  it is an exciting opportunity, it is a fresh connection every time. Dive into Omegle now!
         </p>
         

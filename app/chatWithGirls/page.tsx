@@ -107,16 +107,16 @@ const page = () => {
     <Navbar2/>
     <div>
 
-    <div className="flex flex-col items-center p-6 bg-blue-100 min-h-screen ">
+    <div className="flex flex-col items-center p-6 bg-stone-300 min-h-screen ">
     <div className="mt-4 relative w-full mb-4" >
         <div className="absolute ml-8 text-left">
           <Breadcrumb/>
         </div>
       
       </div>
-      <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom mt-7">
+      <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom mt-7">
         
-        <h1 className="text-4xl font-bold text-gray-800 mb-3 mt-20 text-center">Chat With Girls</h1>
+        <h1 className="text-4xl font-bold text-black mb-3 mt-20 text-center">Chat With Girls</h1>
         
         <p className="text-black mb-16 mx-14 mt-16">
         Our platform is an innovative social network that connects individuals from all over the world through live video chats. With an intuitive interface and seamless performance, it offers a unique chance for users to make new friends online. As a leading entity in the social networking domain, it guarantees a secure and pleasant environment for engaging in meaningful conversations with strangers globally. Whether you are looking to meet new people, practice a foreign language, or simply have fun, this platform stands out as the top choice for virtual socializing.
@@ -128,7 +128,7 @@ const page = () => {
     </button>
 
 
-    <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom">
+    <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom">
         
 
 

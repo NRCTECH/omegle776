@@ -16,7 +16,7 @@ const Navbar2: React.FC = () => {
   };
 
   return (
-    <header className='cursor-pointer mt-14 md:mt-24 w-full bg-blue-300 h-auto md:h-14 flex flex-col md:flex-row items-center justify-between p-4'>
+    <header className='cursor-pointer mt-14 md:mt-24 w-full bg-gray-700 h-auto md:h-14 flex flex-col md:flex-row items-center justify-between p-4'>
       <div className='w-full flex justify-between md:hidden'>
         {/* Küçük ekran için menü butonunu en sola taşı ve Home butonunu yanına ekle */}
         <button onClick={toggleMenu} className='text-black focus:outline-none'>

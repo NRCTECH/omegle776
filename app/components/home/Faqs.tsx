@@ -39,7 +39,7 @@ const Faqs = () => {
             >
               <span className="text-xl font-semibold">{item.question}</span>
               <svg
-                className="w-6 h-6 text-gray-600 transform transition-transform"
+                className="w-6 h-6 text-black transform transition-transform"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ const Faqs = () => {
               </svg>
             </button>
             {openIndex === item._id && (
-              <div className="flex items-center justify-between w-full py-2 px-4 text-left font-bold rounded-b-lg shadow-lg bg-orange-100">
+              <div className="flex items-center justify-between w-full py-2 px-4 text-left font-bold rounded-b-lg shadow-lg bg-gray-200">
                 <p>{item.answer}</p>
               </div>
             )}

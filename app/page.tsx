@@ -146,33 +146,33 @@ export default function Home() {
         <div className="bg-orange-100 items-center flex flex-col text-black text-center">
           <Navbar />
           <Navbar2 />
-          <div className="mt-4 relative w-full">
-            
-            <div className="relative w-64 h-fit bg-blue-400 opacity-85 p-4 rounded-lg shadow-lg text-white mt-3 ml-9">
-            <div className="flex justify-left items-center space-x-4">
-              <h2 className="text-md font-bold">Contents</h2>
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="text-white focus:outline-none hover:text-blue-600"
-              >
-                {isOpen ? "[ close ]" : "[ open ]"}
-              </button>
-            </div>
-            {isOpen && (
-              <ul className="mt-4 space-y-1">
-                {headings.map((content) => (
-                  <li key={content.id} className="text-xs">
-                    <a href={`#${content.id}`} className="text-white hover:text-blue-800 transition duration-300">
-                      {content.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <div className="absolute ml-8 text-left mt-4">
+          <div className="absolute left-8 text-left mt-44">
               <Breadcrumb />
             </div>
+          <div className="flex justify-center items-center relative w-full mt-4">
+            <div className="relative w-64 h-fit bg-gray-700 opacity-85 p-4 rounded-lg shadow-lg text-white ">
+              <div className="flex justify-between items-center space-x-4">
+                <h2 className="text-md font-bold">Contents</h2>
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="text-white focus:outline-none hover:text-blue-600"
+                >
+                  {isOpen ? "[ close ]" : "[ open ]"}
+                </button>
+              </div>
+              {isOpen && (
+                <ul className="mt-4 space-y-1">
+                  {headings.map((content) => (
+                    <li key={content.id} className="text-xs">
+                      <a href={`#${content.id}`} className="text-white hover:text-blue-800 transition duration-300">
+                        {content.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
           </div>
 
           <div className="bg-white border-2 border-gray-400 sm:w-5/12 w-5/6 h-screen rounded-lg shadow-inner-custom overflow-y-auto relative mt-64 md:mt-8">
@@ -201,7 +201,7 @@ export default function Home() {
                 &#33;
               </span>
             </span>
-            <div className=" text-left mt-7 ml-7 mr-6 text-sm">
+            <div className="text-left mt-7 ml-7 mr-6 text-sm">
               Leave Omegle and visit an adult site instead if that is what you are
               looking for, and you are 18 or older.
             </div>
@@ -216,7 +216,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-4 bg-blue-100 border-2 w-full shadow-inner rounded-lg">
+          <div className="mt-4 bg-stone-300 border-r-2 border-l-2 border-t-2 w-full shadow-inner rounded-lg">
             <div className="mt-16 mb-8 font-extrabold text-4xl">
               <h1>Omegle Video Chat With Strangers</h1>
             </div>
@@ -282,7 +282,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-full bg-blue-100">
+          <div className="w-full bg-stone-300">
             <h1 className="mt-16 mb-8 font-extrabold text-4xl">FAQs</h1>
             <div className="max-w-screen-lg w-full mx-auto mb-8 md:mb-16">
               <Faqs />

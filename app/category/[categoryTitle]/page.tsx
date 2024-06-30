@@ -90,7 +90,7 @@ const Category = () => {
                       className="mb-4 rounded border mx-auto"
                     />
                     <h2 className="text-xl font-semibold text-gray-800 mb-4 text-center">{item.title}</h2>
-                    <p className="text-gray-600 text-justify">
+                    <p className="text-black text-justify">
                       {truncateContent(item.content, 50)}
                     </p>
                   </div>

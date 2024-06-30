@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar/Navbar";
 import Navbar2 from "../components/navbar2/Navbar2";
@@ -124,10 +124,14 @@ const Page: React.FC = () => {
       <div>
         <Navbar />
         <Navbar2 />
-        <div className="flex flex-col items-center justify-between p-4 bg-blue-100 min-h-screen mt-0">
-          <div className="mt-0 relative w-full">
-            <div className="left-10 mt-4 bg-blue-400 w-64 rounded-lg ml-9 mb-2">
-              <div className="opacity-85 p-4 rounded-lg shadow-lg text-white">
+        <div className="absolute ml-8 text-left mt-4">
+              <Breadcrumb />
+            </div>
+        <div className="flex flex-col items-center justify-between p-4 bg-stone-300 min-h-screen mt-0">
+
+          <div className="mt-0 relative w-full flex justify-center">
+            <div className="bg-gray-700 w-64 rounded-lg mb-2">
+              <div className="opacity-100 p-4 rounded-lg shadow-lg text-white">
                 <div className="flex justify-left items-center space-x-4">
                   <h2 className="text-md font-bold">Contents</h2>
                   <button
@@ -153,12 +157,10 @@ const Page: React.FC = () => {
                 )}
               </div>
             </div>
-            <div className="absolute ml-8 text-left">
-              <Breadcrumb />
-            </div>
+
           </div>
-          <div className="border-2 md:w-7/12 bg-opacity-30 bg-gray-300 shadow-inner-custom ">
-            <h1 className="text-2xl font-bold text-gray-800 mb-3 mt-9 text-center">
+          <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom">
+            <h1 className="text-2xl font-bold text-black0 mb-3 mt-9 text-center">
               BLOGS
             </h1>
             <div className="flex flex-wrap space-x-4 justify-center underline">
@@ -167,7 +169,7 @@ const Page: React.FC = () => {
                   key={category._id}
                   className={`list-none cursor-pointer ${
                     selectedCategory === category.title
-                      ? "font-bold text-blue-600 "
+                      ? "font-bold text-black"
                       : ""
                   }`}
                   onClick={() => handleCategoryClick(category.title)}

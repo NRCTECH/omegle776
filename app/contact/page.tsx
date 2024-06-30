@@ -107,20 +107,20 @@ const Page: React.FC = () => {
 
       <Navbar />
       <Navbar2 />
-      <div className="flex flex-col items-center p-6 bg-blue-100 mt-0">
+      <div className="flex flex-col items-center p-6 bg-stone-300 mt-0">
         <div className="mt-4 relative w-full">
           <div className="absolute ml-8 text-left">
             <Breadcrumb />
           </div>
         </div>
-        <div className="flex flex-col items-center bg-blue-100 min-h-screen mt-0">
-          <div className="border-2 md:w-11/12 bg-gray-300 bg-opacity-30 shadow-inner-custom p-6 md:p-10 mt-7">
+        <div className="flex flex-col items-center bg-stone-100 bg-opacity-100 min-h-screen mt-0">
+          <div className="border-2 md:w-11/12 bg-stone-100 bg-opacity-100 shadow-inner-custom p-6 md:p-10 mt-7 mb-7">
             <img
               src="contact.webp"
               alt="Profile Picture"
               className="w-auto h-auto object-cover rounded-full p-5 shadow-inner-custom mx-auto"
             />
-            <h1 className="text-2xl font-bold text-gray-800 mb-3 mt-9 text-center">CONTACT US</h1>
+            <h1 className="text-2xl font-bold text-black mb-3 mt-9 text-center">CONTACT US</h1>
             <p className="text-black mb-9 mx-14 text-center">
               Welcome to Omegle
             </p>

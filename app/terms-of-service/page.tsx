@@ -42,7 +42,7 @@ const TermsOfServices = () => {
                     <Navbar2 />
                 </div>
             </div>
-            <div className=" flex flex-col items-center justify-center mt-8">
+            <div className=" flex flex-col items-center justify-center mt-0 pt-8 bg-stone-300">
 
                 <div className="min-h-screen">
 

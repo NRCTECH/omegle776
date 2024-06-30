@@ -103,16 +103,16 @@ const page = () => {
       <Navbar/>
       <Navbar2/>
     
-    <div className="flex flex-col items-center p-6 bg-blue-100 min-h-screen ">
+    <div className="flex flex-col items-center p-6 bg-stone-300 min-h-screen ">
     <div className="mt-4 relative w-full mb-4" >
         <div className="absolute ml-8 text-left">
           <Breadcrumb/>
         </div>
       
       </div>
-      <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom mt-7">
+      <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom mt-7">
         
-        <h1 className="text-4xl font-bold text-gray-800 mb-3 mt-20 text-center">OME TV</h1>
+        <h1 className="text-4xl font-bold text-black mb-3 mt-20 text-center">OME TV</h1>
         <h1 className="text-3xl font-bold text-black mb-6 mt-14 text-left ml-14">Introduction to OmeTV</h1>
         <p className="text-black mb-16 mx-14">
         OmeTV is a cutting-edge social platform that brings people together from all corners of the globe through live video chats. Featuring a user-friendly interface and smooth functionality, OmeTV presents a distinctive opportunity for individuals to connect and forge new friendships online. As a prominent figure in the social networking realm, OmeTV ensures a safe and enjoyable space for users to have meaningful conversations with strangers worldwide. Whether you want to meet new people, practice a foreign language, or just have fun, OmeTV is the premier destination for virtual socializing.        </p>
@@ -123,7 +123,7 @@ const page = () => {
     </button>
 
 
-    <div className="border-2 md:w-7/12 bg-gray-300 bg-opacity-30 shadow-inner-custom">
+    <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom">
         
         <div className="font-extrabold text-3xl mb-7 ml-14 mt-24">
         How OmeTV Works
