@@ -10,8 +10,8 @@ const Footer = () => {
       &copy; Copyright 2023 | Omegle - Connect with Strangers Online
     </div>
     <div className="flex flex-wrap justify-center md:justify-end gap-4">
-      <Link href="/terms" className="block md:inline-block hover:text-gray-600 underline">Terms and Conditions</Link>
-      <Link href="/privacyPolicy" className="block md:inline-block hover:text-gray-600 underline">Privacy Policy</Link>
+      <Link href="/terms-of-service" className="block md:inline-block hover:text-gray-600 underline">Terms and Conditions</Link>
+      <Link href="/privacy-policy" className="block md:inline-block hover:text-gray-600 underline">Privacy Policy</Link>
       <Link href="/contact" className="block md:inline-block hover:text-gray-600 underline">Contact Us</Link>
     </div>
   </div>

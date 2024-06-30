@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar/Navbar";
 import Navbar2 from "../components/navbar2/Navbar2";
@@ -11,7 +11,7 @@ import Link from "next/link";
 interface IBlogItem {
   _id: string;
   title: string;
-  category: {_id: string, title: string};
+  category: { _id: string; title: string };
   description: string;
   image: string;
 }
@@ -29,16 +29,21 @@ const Page: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const router = useRouter();
 
+  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await fetch("/api/categories", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      setCategories(data);
+      try {
+        const res = await fetch("/api/categories");
+        if (!res.ok) {
+          throw new Error("Failed to fetch categories");
+        }
+        const data = await res.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
     };
 
     fetchCategories();
@@ -47,23 +52,28 @@ const Page: React.FC = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch("/api/blogs", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const res = await fetch("/api/blogs");
         if (!res.ok) {
-          throw new Error("Veri alınamadı");
+          throw new Error("Failed to fetch blogs");
         }
         const data = await res.json();
         setBlogs(data);
       } catch (error) {
-        console.error("Bloglar alınırken hata oluştu:", error);
+        console.error("Error fetching blogs:", error);
       }
     };
+
     fetchBlogs();
   }, []);
+
+  useEffect(() => {
+    const headingElements = Array.from(document.querySelectorAll("h1"));
+    const headingTexts = headingElements.map((heading) => ({
+      id: heading.id,
+      text: heading.textContent || "",
+    }));
+    setHeadings(headingTexts);
+  }, [blogs]);
 
   const handleReadMore = (title: string) => {
     router.push(`/blog/${title}`);
@@ -71,120 +81,83 @@ const Page: React.FC = () => {
 
   const handleCategoryClick = (category: string | null) => {
     setSelectedCategory(category);
-    setCurrentPage(1); // Kategori değiştiğinde sayfayı 1'e ayarla
+    setCurrentPage(1);
   };
 
-  // Calculate index of the last blog on current page
   const indexOfLastBlog = currentPage * blogsPerPage;
-  // Calculate index of the first blog on current page
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
 
-  // Filter blogs based on selected category
   const filteredBlogs = selectedCategory
     ? blogs.filter((blog) => blog.category.title === selectedCategory)
     : blogs;
 
-  // Slice blogs array to get blogs for the current page
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-  const jsonLdWebSite = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Omegle",
-    "url": "https://omegle-seven.vercel.app/blog",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://omegle-seven.vercel.app/blog/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  };
-  
-  const jsonLdOrganization = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Omegle",
-    "url": "https://omegle-seven.vercel.app/blog",
-    "logo": "https://omegle-mu.vercel.app/static/logo.png",
-    "sameAs": [
-      "https://www.facebook.com/Omegle",
-      "https://twitter.com/Omegle",
-      "https://www.instagram.com/Omegle"
-    ]
-  };
-  
-  const jsonLdWebPage = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Omegle: Talk to Strangers",
-    "description": "Omegle is just a great way to Video Chat with Girls, meet new people and have a fun time omegle people.",
-    "url": "https://omegle-seven.vercel.app/blog"
-  };
-  
-  const jsonLdBreadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://omegle-seven.vercel.app"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://omegle-seven.vercel.app/blog"
-      }
-    ]
-  };
 
   return (
     <div>
       <Head>
         <title>Blog - Omegle: Talk to strangers!</title>
-        <meta name="description" content="Omegle is a great place to meet new friends..."/>
-        <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends"/>
-        <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!"/>
-        <meta property="og:description" content="Omegle is a great place to meet new friends..."/>
-        <meta property="og:image" content="https://omegle-seven.vercel.app/blog-img.webp"/>
+        <meta
+          name="description"
+          content="Omegle is a great place to meet new friends..."
+        />
+        <meta
+          name="keywords"
+          content="Omegle, chat, meet new people, secure chat, online friends"
+        />
+        <meta
+          property="og:title"
+          content="Omegle.com - Omegle: Talk to strangers!"
+        />
+        <meta
+          property="og:description"
+          content="Omegle is a great place to meet new friends..."
+        />
+        <meta
+          property="og:image"
+          content="https://omegle-seven.vercel.app/blog-img.webp"
+        />
       </Head>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
-      />
 
       <div>
         <Navbar />
         <Navbar2 />
-        <div className="flex flex-col items-center justify-between p-6 bg-blue-100 min-h-screen mt-0">
-          <div className="mt-4 relative w-full">
+        <div className="flex flex-col items-center justify-between p-4 bg-blue-100 min-h-screen mt-0">
+          <div className="mt-0 relative w-full">
+            <div className="left-10 mt-4 bg-blue-400 w-64 rounded-lg ml-9 mb-2">
+              <div className="opacity-85 p-4 rounded-lg shadow-lg text-white">
+                <div className="flex justify-left items-center space-x-4">
+                  <h2 className="text-md font-bold">Contents</h2>
+                  <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="text-white focus:outline-none hover:text-blue-600"
+                  >
+                    {isOpen ? "[ close ]" : "[ open ]"}
+                  </button>
+                </div>
+                {isOpen && (
+                  <ul className="mt-4 space-y-1">
+                    {headings.map((content) => (
+                      <li key={content.id} className="text-xs">
+                        <a
+                          href={`#${content.id}`}
+                          className="text-white hover:text-blue-600 transition duration-300"
+                        >
+                          {content.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
             <div className="absolute ml-8 text-left">
               <Breadcrumb />
             </div>
           </div>
           <div className="border-2 md:w-7/12 bg-opacity-30 bg-gray-300 shadow-inner-custom ">
-            <img
-              src="blog-img.webp"
-              alt="Profile Picture"
-              className="w-full h-full object-cover rounded-md p-5"
-            />
-
             <h1 className="text-2xl font-bold text-gray-800 mb-3 mt-9 text-center">
               BLOGS
             </h1>
@@ -207,7 +180,11 @@ const Page: React.FC = () => {
             <div className="mt-9 space-y-12 ml-7 mr-7 relative">
               {currentBlogs.map((blog) => (
                 <div key={blog._id} className="space-y-4">
-                 <button onClick={() => handleReadMore(blog.title)}><h1 className="text-xl font-bold mb-4">{blog.title}</h1></button>
+                  <h1 className="text-xl font-bold mb-4">
+                    <button onClick={() => handleReadMore(blog.title)}>
+                      {blog.title}
+                    </button>
+                  </h1>
                   <div className="space-y-4">
                     <img
                       src={blog.image}
@@ -218,9 +195,10 @@ const Page: React.FC = () => {
                       <div
                         className="text-black"
                         dangerouslySetInnerHTML={{
-                          __html: blog.description.length > 1500
-                            ? `${blog.description.slice(0, 1400)}...`
-                            : blog.description,
+                          __html:
+                            blog.description.length > 1500
+                              ? `${blog.description.slice(0, 1400)}...`
+                              : blog.description,
                         }}
                       />
                       <button
@@ -235,7 +213,6 @@ const Page: React.FC = () => {
               ))}
             </div>
 
-            {/* Sayfalandırma */}
             <div className="flex justify-center mt-6">
               {Array.from(
                 { length: Math.ceil(filteredBlogs.length / blogsPerPage) },
