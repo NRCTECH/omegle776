@@ -236,12 +236,12 @@ export default function Home() {
         Omegle (oh·meg·ull) provides an exciting platform to make new friends. When using Omegle, you are randomly matched with another individual for one-on-one conversations. Additionally, you have the option to add your interests, allowing you to be paired with someone who shares similar interests.
     </div>
 
-    <div className="text-xl md:text-2xl text-left mb-9">
+    <div className="text-xl md:text-lg text-left mb-9">
         <h1><strong>What Is New Omegle?</strong></h1>
         For your safety, conversations on Omegle are anonymous unless you choose to disclose your identity (not recommended!). Community Guidelines You have the freedom to end a chat at any time. Please refer to our Terms of Service and Community Guidelines for guidance on using Omegle responsibly. While Omegle video chat is moderated, it is important to note that moderation is not flawless. Users bear full responsibility for their conduct while using Omegle.
     </div>
 
-    <div className="text-xl md:text-2xl text-left mb-9">
+    <div className="text-xl md:text-lg text-left mb-9">
         <h1><strong>How Does It Work?</strong></h1>
         At this platform, our chat system gathers only the necessary
         information from users to find the perfect match for them. Using
@@ -249,7 +249,7 @@ export default function Home() {
         match them with compatible chat partners from our extensive database.
     </div>
 
-    <div className="text-xl md:text-2xl text-left">
+    <div className="text-xl md:text-lg text-left">
         <h1><strong>Omegle Features</strong></h1>
         Our platform inherits the legacy of being the year is most visited
         online random video chat website, offering an array of remarkable
@@ -267,7 +267,7 @@ export default function Home() {
         <p>• Omegle Mobile-Friendly</p>
     </div>
 
-    <div className="text-xl md:text-2xl text-left mb-14">
+    <div className="text-xl md:text-lg text-left mb-14">
         <h1><strong>Alternatives</strong></h1>
         At this platform, our chat system gathers only the necessary
         information from users to find the perfect match for them. Using
