@@ -6,23 +6,24 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Breadcrumb from "../components/breadCrumb/BreadCrumb";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Chat with Girls - Omegle: Talk to strangers!",
+  title: "OmeTv - Omegle: Talk to strangers!",
   description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
   keywords: "Omegle, chat, meet new people, secure chat, online friends",
   robots: "index, follow",
 };
+
 const jsonLdWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Omegle",
-  "url": "https://omegle-seven.vercel.app/chatWithGirls",
+  "url": "https://omegle-seven.vercel.app/ometv",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://omegle-seven.vercel.app/chatWithGirls/search?q={search_term_string}",
+    "target": "https://omegle-seven.vercel.app/ometv/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 };
@@ -31,7 +32,7 @@ const jsonLdOrganization = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Omegle",
-  "url": "https://omegle-seven.vercel.app/chatWithGirls",
+  "url": "https://omegle-seven.vercel.app/ometv",
   "logo": "https://omegle-mu.vercel.app/static/logo.png",
   "sameAs": [
     "https://www.facebook.com/Omegle",
@@ -45,7 +46,7 @@ const jsonLdWebPage = {
   "@type": "WebPage",
   "name": "Omegle: Talk to Strangers",
   "description": "Omegle is just a great way to Video Chat with Girls, meet new people and have a fun time omegle people.",
-  "url": "https://omegle-seven.vercel.app/chatWithGirls"
+  "url": "https://omegle-seven.vercel.app/ometv"
 };
 
 const jsonLdBreadcrumb = {
@@ -61,29 +62,30 @@ const jsonLdBreadcrumb = {
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "ChatWithGirls",
-      "item": "https://omegle-seven.vercel.app/chatWithGirls"
+      "name": "OmeTv",
+      "item": "https://omegle-seven.vercel.app/ometv"
     }
   ]
 };
 
 
-
 const page = () => {
   return (
-
-<>
-      <head>
+    <>
+      <Head>
+      <title>OmeTV - Omegle Talk to Strangers</title>
+<meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
+<meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
-        <link rel="canonical" href="https://omegle-seven.vercel.app/chatWithGirls"/>
+        <link rel="canonical" href="https://omegle-seven.vercel.app/ometv"/>
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
         <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
-      </head>
+      </Head>
 
       <script
           type="application/ld+json"
@@ -102,12 +104,10 @@ const page = () => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
         />
 
-
-<body className={inter.className}>
-    <Navbar/>
-    <Navbar2/>
     <div>
-
+      <Navbar/>
+      <Navbar2/>
+    
     <div className="flex flex-col items-center p-6 bg-stone-300 min-h-screen ">
     <div className="mt-4 relative w-full mb-4" >
         <div className="absolute ml-8 text-left">
@@ -117,11 +117,10 @@ const page = () => {
       </div>
       <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom mt-7">
         
-        <h1 className="text-4xl font-bold text-black mb-3 mt-20 text-center">Chat With Girls</h1>
-        
-        <p className="text-black mb-16 mx-14 mt-16">
-        Our platform is an innovative social network that connects individuals from all over the world through live video chats. With an intuitive interface and seamless performance, it offers a unique chance for users to make new friends online. As a leading entity in the social networking domain, it guarantees a secure and pleasant environment for engaging in meaningful conversations with strangers globally. Whether you are looking to meet new people, practice a foreign language, or simply have fun, this platform stands out as the top choice for virtual socializing.
-                </p>
+        <h1 className="text-4xl font-bold text-black mb-3 mt-20 text-center">OME TV</h1>
+        <h1 className="text-3xl font-bold text-black mb-6 mt-14 text-left ml-14">Introduction to OmeTV</h1>
+        <p className="text-black mb-16 mx-14">
+        OmeTV is a cutting-edge social platform that brings people together from all corners of the globe through live video chats. Featuring a user-friendly interface and smooth functionality, OmeTV presents a distinctive opportunity for individuals to connect and forge new friendships online. As a prominent figure in the social networking realm, OmeTV ensures a safe and enjoyable space for users to have meaningful conversations with strangers worldwide. Whether you want to meet new people, practice a foreign language, or just have fun, OmeTV is the premier destination for virtual socializing.        </p>
         
       </div>
   <button title='Title' className="bg-gradient-to-r mt-20 from-blue-400 py-5 px-32 to-blue-600 text-xl text-white animate-bounce font-bold py-2 px-4 rounded-full cursor-pointer hover:from-blue-500 hover:to-blue-700 transition duration-300">
@@ -131,30 +130,42 @@ const page = () => {
 
     <div className="border-2 md:w-7/12 bg-stone-100 bg-opacity-100 shadow-inner-custom">
         
+        <div className="font-extrabold text-3xl mb-7 ml-14 mt-24">
+        How OmeTV Works
+        </div>
+        <div className="text-left ml-14 mr-14 mb-9">
+        OmeTV serves as a vibrant platform that enables random video chats among users globally. Upon entering the app, users are instantly paired with strangers for spontaneous video conversations. The app is user-friendly interface ensures smooth navigation, making it easy to start and end chats. Through OmeTV, individuals can engage in real-time interactions with people from various backgrounds and cultures. The app emphasizes user privacy and safety, featuring anonymity and reporting tools to maintain a secure environment. Available on both Android and iOS devices, OmeTV offers a convenient way for users to connect with others and expand their social circles. Whether you are looking for casual chats or meaningful connections, OmeTV provides a platform for spontaneous and enjoyable interactions, enhancing the online social experience for users around the world.        </div>
+
+
+
 
 
         <div className="font-extrabold text-3xl mb-7 ml-14 mt-12">
-        Is Random Video Chat Worth Trying?
+        Is OmeTV Worth Trying?
         </div>
 
         <div className=" text-left mt-3 ml-14 mr-12 mb-9">
+        OmeTV is definitely a platform to consider for those wanting to expand their social circle, practice language skills, or simply enjoy meeting new people online. Here are some key factors to consider when deciding to try OmeTV:        </div>  
+        
 
-        Random Video Chat provides an exhilarating and valuable experience for anyone interested in spontaneous connections and meaningful interactions. Its worldwide accessibility, dedication to authenticity, and focus on user safety make it an excellent option for those aiming to broaden their social horizons in the digital era.
-                </div>
-        <div className="font-extrabold text-3xl mb-7 ml-14 mt-12">
-        Summary of Random Video Chat
+        <div className=" space-y-1 text-left ml-24 mt-5 mb-14 mr-12">
+          <p>• Safety Measures:OmeTV places a high priority on user safety, employing stringent moderation to ensure a secure and pleasant experience for all users.</p>
+          <p>
+            • Privacy Considerations: While OmeTV facilitates anonymous video chats, it is important for users to exercise caution and avoid sharing personal information with strangers.
+
+          </p>
+          <p>
+            • Interactive Features: OmeTV provides a variety of interactive features, such as text chat and virtual gifts, which enhance the user experience and make interactions more engaging and enjoyable.
+          </p>
+          
         </div>
-        <div className=" text-left mt-3 ml-14 mr-12 mb-9 mb-16">
-        Random Video Chat transforms online socializing by enabling instant and genuine connections with strangers via live video interactions. Its worldwide reach, strong focus on privacy and safety, and user-friendly design set it apart as a leading platform for spontaneous encounters and meaningful conversations. Users are invited to enjoy the excitement while remaining cautious, ensuring a positive and enriching experience every time.        </div>
 
         
       </div>
 
     </div>
     <Footer/>
-       </div>
-    </body>
- 
+    </div>
     </>
   );
 };

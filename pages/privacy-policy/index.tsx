@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import Navbar from '../components/navbar/Navbar';
-import Navbar2 from '../components/navbar2/Navbar2';
-import Footer from '../components/footer/Footer';
+import Navbar from '../../app/components/navbar/Navbar';
+import Navbar2 from '../../app/components/navbar2/Navbar2';
+import Footer from '../../app/components/footer/Footer';
 import 'react-quill/dist/quill.snow.css';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -31,12 +31,12 @@ const PrivacyPolicy: React.FC = () => {
 
     return (
         <div>
-            <head>
+            <Head>
                 <title>Privacy Policy - Omegle: Talk to strangers!</title>
                 <link rel="canonical" href="https://omegle-seven.vercel.app/privacy-policy"/>
 
                 <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-            </head>
+            </Head>
             <div className="pt-4">
                 <div className="fixed top-0 w-full z-10">
                     <Navbar />

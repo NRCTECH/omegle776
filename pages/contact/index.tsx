@@ -84,7 +84,7 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <head>
+      <Head>
         <title>Contact Us - Omegle: Talk to strangers!</title>
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="canonical" href="https://omegle-seven.vercel.app/contact"/>
@@ -94,7 +94,7 @@ const Page: React.FC = () => {
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends..." />
         <meta property="og:image" content="https://omegle-seven.vercel.app/blog-img.webp" />
-      </head>
+      </Head>
 
       <script
         type="application/ld+json"

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Navbar from '@/app/components/navbar/Navbar';
-import Navbar2 from '@/app/components/navbar2/Navbar2';
 import { useRouter } from 'next/router';
 import { htmlToText } from 'html-to-text';
-import Breadcrumb from '@/app/components/breadCrumb/BreadCrumb';
 import Footer from '@/app/components/footer/Footer';
 import { format } from 'date-fns';
+import Navbar2 from '../components/navbar2/Navbar2';
+import Breadcrumb from '../components/breadCrumb/BreadCrumb';
 
 interface IBlogItem {
   _id: string;
@@ -259,7 +259,10 @@ const BlogDetail = ({ blog, faqs = [] }: BlogDetailProps) => {
       </Head>
       <Navbar />
       <Navbar2 />
-      <Breadcrumb category={blog?.category.title} title={blog?.title} />
+      <div className='mt-4 ml-7'>
+      <Breadcrumb  category={blog?.category.title} title={blog?.title} />
+
+      </div>
       <div className="container mx-auto px-4">
       <div className='border-2 bg-stone-100 bg-opacity-100 mb-16 w-4/5 mx-auto mt-12'>
 

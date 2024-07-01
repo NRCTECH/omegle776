@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import Navbar from '../components/navbar/Navbar';
-import Navbar2 from '../components/navbar2/Navbar2';
-import Footer from '../components/footer/Footer';
+import Navbar from '../../app/components/navbar/Navbar';
+import Footer from '../../app/components/footer/Footer';
 import 'react-quill/dist/quill.snow.css';
+import Navbar2 from '../components/navbar2/Navbar2';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 

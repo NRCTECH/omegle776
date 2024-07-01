@@ -2,11 +2,11 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import Navbar from '../../components/navbar/Navbar'
-import Navbar2 from '../../components/navbar2/Navbar2'
 import { htmlToText } from 'html-to-text'
-import Breadcrumb from '@/app/components/breadCrumb/BreadCrumb'
 import Footer from '@/app/components/footer/Footer'
+import Navbar from '../components/navbar/Navbar'
+import Navbar2 from '../components/navbar2/Navbar2'
+import Breadcrumb from '../components/breadCrumb/BreadCrumb'
 
 
 const Category = () => {

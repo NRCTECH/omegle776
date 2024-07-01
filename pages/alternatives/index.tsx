@@ -7,12 +7,6 @@ import Breadcrumb from "../components/breadCrumb/BreadCrumb";
 import Head from "next/head";
 
 
-export const metadata: Metadata = {
-  title: "Alternatives - Omegle: Talk to strangers!",
-  description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
-  keywords: "Omegle, chat, meet new people, secure chat, online friends",
-  robots: "index, follow",
-};
 
 const jsonLdWebSite = {
   "@context": "https://schema.org",
@@ -69,7 +63,10 @@ const jsonLdBreadcrumb = {
 const page = () => {
   return (
     <>
-      <head>
+      <Head>
+      <title>Alternatives - Omegle Talk to Strangers</title>
+<meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
+<meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
 
     <link rel="canonical" href="https://omegle-seven.vercel.app/alternatives"/>
 
@@ -79,7 +76,7 @@ const page = () => {
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-      </head>
+      </Head>
     
       <script
           type="application/ld+json"

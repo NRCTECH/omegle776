@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/app/components/navbar/Navbar";
-import Navbar2 from "@/app/components/navbar2/Navbar2";
-import Breadcrumb from "@/app/components/breadCrumb/BreadCrumb";
 import Footer from "@/app/components/footer/Footer";
 import Head from "next/head";
+import Navbar2 from "../components/navbar2/Navbar2";
+import Breadcrumb from "../components/breadCrumb/BreadCrumb";
 
 const jsonLdWebSite = {
   "@context": "https://schema.org",
@@ -162,9 +162,10 @@ const Page: React.FC = () => {
   return (
     <div>
             <Head>
-        <title>Blogs - Omegle: Talk to Strangers!</title>
-        <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
-        <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
+            <title>Blogs - Omegle Talk to Strangers</title>
+<meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
+<meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
+
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://omegle-seven.vercel.app/blog" />
 

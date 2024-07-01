@@ -1,14 +1,14 @@
 "use client";
 
-import Breadcrumb from "@/app/components/breadCrumb/BreadCrumb";
-import Footer from "@/app/components/footer/Footer";
-import Faqs from "@/app/components/home/Faqs";
-import Navbar from "@/app/components/navbar/Navbar";
-import Navbar2 from "@/app/components/navbar2/Navbar2";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Breadcrumb from "./components/breadCrumb/BreadCrumb";
+import Navbar from "./components/navbar/Navbar";
+import Navbar2 from "./components/navbar2/Navbar2";
+import Faqs from "./components/home/Faqs";
+import Footer from "./components/footer/Footer";
 
 interface IFaqItem {
   question: string;
@@ -149,14 +149,14 @@ export default function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
         />
 
-        <div className="bg-orange-100 items-center flex flex-col text-black text-center">
+        <div className="bg-orange-100 flex flex-col text-black">
           <Navbar />
           <Navbar2 />
-          <div className="absolute left-8 text-left mt-44">
+          <div className="mt-6 ml-9">
               <Breadcrumb />
             </div>
           <div className="flex justify-center items-center relative w-full mt-4">
-            <div className="relative w-64 h-fit bg-gray-700 opacity-85 p-4 rounded-lg shadow-lg text-white ">
+            <div className="relative w-64 h-fit items-center bg-gray-700 opacity-85 p-4 rounded-lg shadow-lg text-white ">
               <div className="flex justify-between items-center space-x-4">
                 <h2 className="text-md font-bold">Contents</h2>
                 <button title='Title'
@@ -181,7 +181,7 @@ export default function Home() {
 
           </div>
 
-          <div className="bg-white border-2 border-gray-400 sm:w-5/12 w-5/6 h-screen rounded-lg shadow-inner-custom overflow-y-auto relative mt-64 md:mt-8">
+          <div className="items-center mx-auto bg-white border-2 border-gray-400 text-center sm:w-5/12 w-5/6 h-screen rounded-lg shadow-inner-custom overflow-y-auto relative mt-16 md:mt-8">
             <div className="text-left mt-7 ml-7 mr-6 mb-4 text-sm">
               You do not need an app to use Omegle on your phone or tablet! The web
               site works great on mobile.
@@ -222,73 +222,61 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-4 bg-stone-300 border-r-2 border-l-2 border-t-2 w-full shadow-inner rounded-lg">
-            <div className="mt-16 mb-8 font-extrabold text-4xl">
-              <h1>Omegle Video Chat With Strangers</h1>
-            </div>
-            <img src="home3.webp" alt="Logo 1" className="p-1 mt-16 mb-8 mx-auto w-8/12 h-2/6" />
-            <div className="font-extrabold text-3xl mb-7">
-              Omegle: Talk to strangers!
-            </div>
-            <div className="text-left ml-24 mr-24 mb-9">
-              Omegle is a platform designed specifically for users who are 18 years of age or older. By entering and utilizing this site, you confirm that you meet the age requirement of being at least 18 years old. This service connects strangers from around the world for anonymous text or video chats. While it offers an opportunity for unique and spontaneous interactions, users must be aware of and comply with the age restriction to ensure a safe and appropriate environment for all participants.
-              <br />
-              <br />
-              Omegle (oh·meg·ull) provides an exciting platform to make new friends. When using Omegle, you are randomly matched with another individual for one-on-one conversations. Additionally, you have the option to add your interests, allowing you to be paired with someone who shares similar interests.
-            </div>
+          <div className="mt-4 bg-stone-300 border-r-2 border-l-2 border-t-2 w-full shadow-inner rounded-lg text-center px-2 sm:px-6 md:px-12 lg:px-24">
+    <div className="mt-16 mb-8 font-extrabold text-2xl md:text-4xl">
+        <h1>Omegle Video Chat With Strangers</h1>
+    </div>
+    <img src="home3.webp" alt="Logo 1" className="p-1 mt-16 mb-8 mx-auto w-11/12 md:w-8/12 h-2/6" />
+    <div className="font-extrabold text-xl md:text-3xl mb-7">
+        Omegle: Talk to strangers!
+    </div>
+    <div className="text-left text-base md:text-lg px-2 md:px-0 mb-9">
+        Omegle is a platform designed specifically for users who are 18 years of age or older. By entering and utilizing this site, you confirm that you meet the age requirement of being at least 18 years old. This service connects strangers from around the world for anonymous text or video chats. While it offers an opportunity for unique and spontaneous interactions, users must be aware of and comply with the age restriction to ensure a safe and appropriate environment for all participants.
+        <br /><br />
+        Omegle (oh·meg·ull) provides an exciting platform to make new friends. When using Omegle, you are randomly matched with another individual for one-on-one conversations. Additionally, you have the option to add your interests, allowing you to be paired with someone who shares similar interests.
+    </div>
 
-            <div className="text-2xl text-left ml-24 ">
-              <h1><strong>What Is New Omegle?</strong></h1>
-            </div>
+    <div className="text-xl md:text-2xl text-left mb-9">
+        <h1><strong>What Is New Omegle?</strong></h1>
+        For your safety, conversations on Omegle are anonymous unless you choose to disclose your identity (not recommended!). Community Guidelines You have the freedom to end a chat at any time. Please refer to our Terms of Service and Community Guidelines for guidance on using Omegle responsibly. While Omegle video chat is moderated, it is important to note that moderation is not flawless. Users bear full responsibility for their conduct while using Omegle.
+    </div>
 
-            <div className=" text-left mt-3 ml-24 mr-24 mb-9">
-              For your safety, conversations on Omegle are anonymous unless you choose to disclose your identity (not recommended!). Community Guidelines You have the freedom to end a chat at any time. Please refer to our Terms of Service and Community Guidelines for guidance on using Omegle responsibly. While Omegle video chat is moderated, it is important to note that moderation is not flawless. Users bear full responsibility for their conduct while using Omegle.
-            </div>
+    <div className="text-xl md:text-2xl text-left mb-9">
+        <h1><strong>How Does It Work?</strong></h1>
+        At this platform, our chat system gathers only the necessary
+        information from users to find the perfect match for them. Using
+        cutting-edge AI technology, we analyze user inputs and preferences to
+        match them with compatible chat partners from our extensive database.
+    </div>
 
-            <div className="text-2xl text-left ml-24 ">
-              <h1><strong>How Does It Work?</strong></h1>
-            </div>
+    <div className="text-xl md:text-2xl text-left">
+        <h1><strong>Omegle Features</strong></h1>
+        Our platform inherits the legacy of being the year is most visited
+        online random video chat website, offering an array of remarkable
+        features:
+    </div>
 
-            <div className=" text-left mt-3 ml-24 mr-24 mb-9">
-              At this platform, our chat system gathers only the necessary
-              information from users to find the perfect match for them. Using
-              cutting-edge AI technology, we analyze user inputs and preferences to
-              match them with compatible chat partners from our extensive database.
-            </div>
+    <div className="space-y-1 text-left pl-9 md:pl-36 mt-5 mb-9">
+        <p>• Engage in live 1 v1 Chat channels with strangers.</p>
+        <p>• Global Conversations in an Instant:</p>
+        <p>• Complete Confidentiality</p>
+        <p>• Simple and Convenient</p>
+        <p>• Safe and Secure:</p>
+        <p>• Omegle Random Matching Algorithm</p>
+        <p>• Next-Level Experience with AI-Powered Enhancements:</p>
+        <p>• Omegle Mobile-Friendly</p>
+    </div>
 
-            <div className="text-2xl text-left ml-24 ">
-              <h1><strong>Omegle Features</strong></h1>
-            </div>
+    <div className="text-xl md:text-2xl text-left mb-14">
+        <h1><strong>Alternatives</strong></h1>
+        At this platform, our chat system gathers only the necessary
+        information from users to find the perfect match for them. Using
+        cutting-edge AI technology, we analyze user inputs and preferences to
+        match them with compatible chat partners from our extensive database.
+    </div>
+</div>
 
-            <div className=" text-left mt-3 ml-24 mr-24 ">
-              Our platform inherits the legacy of being the year is most visited
-              online random video chat website, offering an array of remarkable
-              features:
-            </div>
-
-            <div className=" space-y-1 text-left ml-36 mt-5 mb-9">
-              <p>• Engage in live 1 v1 Chat channels with strangers.</p>
-              <p>• Global Conversations in an Instant:</p>
-              <p>• Complete Confidentiality</p>
-              <p>• Simple and Convenient</p>
-              <p>• Safe and Secure:</p>
-              <p>• Omegle Random Matching Algorithm</p>
-              <p>• Next-Level Experience with AI-Powered Enhancements:</p>
-              <p>• Omegle Mobile-Friendly</p>
-            </div>
-
-            <div className="text-2xl text-left ml-24 ">
-              <h1><strong>Alternatives</strong></h1>
-            </div>
-            <div className=" text-left mt-3 ml-24 mr-24 mb-14">
-              At this platform, our chat system gathers only the necessary
-              information from users to find the perfect match for them. Using
-              cutting-edge AI technology, we analyze user inputs and preferences to
-              match them with compatible chat partners from our extensive database.
-            </div>
-          </div>
-
-          <div className="w-full bg-stone-300">
+          <div className="w-full bg-stone-300 text-center">
             <h1 className="mt-16 mb-8 font-extrabold text-4xl">FAQs</h1>
             <div className="max-w-screen-lg w-full mx-auto mb-8 md:mb-16">
               <Faqs />

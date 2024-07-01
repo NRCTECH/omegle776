@@ -9,12 +9,7 @@ import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "About - Omegle: Talk to strangers!",
-  description: "Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other.",
-  keywords: "Omegle, chat, meet new people, secure chat, online friends",
-  robots: "index, follow",
-};
+
 const jsonLdWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -70,7 +65,11 @@ const jsonLdBreadcrumb = {
 const Page: React.FC = () => {
   return (
     <>
-      <head>
+      <Head>
+      <title>About - Omegle Talk to Strangers</title>
+<meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
+<meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
+
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
 
@@ -81,7 +80,7 @@ const Page: React.FC = () => {
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
         <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
-      </head>
+      </Head>
       
       
       <script
@@ -104,8 +103,8 @@ const Page: React.FC = () => {
         <Navbar />
         <Navbar2 />
         <div className="flex flex-col items-center p-6 bg-stone-300 mt-0">
-        <div className="mt-4 relative w-full " >
-        <div className="absolute ml-8 text-left">
+        <div className="mt-4 mb-12 relative w-full " >
+        <div className="ml-4 text-left">
           <Breadcrumb/>
         </div>
       </div>
