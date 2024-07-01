@@ -70,16 +70,18 @@ const jsonLdBreadcrumb = {
 const Page: React.FC = () => {
   return (
     <>
-      <Head>
+      <head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
+
+        <link rel="canonical" href="https://omegle-seven.vercel.app/about"/>
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://omegle-seven.vercel.app" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />
         <meta property="og:description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
         <meta property="og:image" content="https://omegle-seven.vercel.app/about.webp" />
-      </Head>
+      </head>
       
       
       <script

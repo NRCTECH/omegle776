@@ -76,6 +76,8 @@ const Page: React.FC = () => {
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
+        <link rel="canonical" href="https://omegle-seven.vercel.app/chatOnline"/>
+
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://omegle-seven.vercel.app" />

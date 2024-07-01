@@ -33,6 +33,8 @@ const TermsOfServices: React.FC = () => {
         <div>
             <Head>
                 <title>Terms Of Service - Omegle</title>
+                <link rel="canonical" href="https://omegle-seven.vercel.app/terms-of-service"/>
+
                 <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
             </Head>
             <div className="pt-4">

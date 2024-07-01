@@ -1,10 +1,63 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/navbar/Navbar";
-import Navbar2 from "../components/navbar2/Navbar2";
-import Footer from "../components/footer/Footer";
 import { useRouter } from "next/navigation";
-import Breadcrumb from "../components/breadCrumb/BreadCrumb";
+import Navbar from "@/app/components/navbar/Navbar";
+import Navbar2 from "@/app/components/navbar2/Navbar2";
+import Breadcrumb from "@/app/components/breadCrumb/BreadCrumb";
+import Footer from "@/app/components/footer/Footer";
+import Head from "next/head";
+
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Omegle",
+  "url": "https://omegle-seven.vercel.app/blog",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://omegle-seven.vercel.app/blog/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const jsonLdOrganization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Omegle",
+  "url": "https://omegle-seven.vercel.app/blog",
+  "logo": "https://omegle-seven.vercel.app/static/logo.png",
+  "sameAs": [
+    "https://www.facebook.com/Omegle",
+    "https://twitter.com/Omegle",
+    "https://www.instagram.com/Omegle"
+  ]
+};
+
+const jsonLdWebPage = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Omegle: Talk to Strangers",
+  "description": "Omegle is just a great way to Video Chat with Girls, meet new people and have a fun time omegle people.",
+  "url": "https://omegle-seven.vercel.app/blog"
+};
+
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://omegle-seven.vercel.app"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://omegle-seven.vercel.app/blog"
+    }
+  ]
+};
 
 interface IBlogItem {
   _id: string;
@@ -12,12 +65,21 @@ interface IBlogItem {
   category: { _id: string; title: string };
   description: string;
   image: string;
+  createdAt: string;
 }
 
 interface ICategoryItem {
   _id: string;
   title: string;
 }
+
+const slugify = (title: string): string =>
+  title
+    .toLowerCase()
+    .replace(/%20/g, '-') // %20'leri kısa çizgiye çevir
+    .replace(/[\s\W-]+/g, '-') // Boşlukları ve özel karakterleri kısa çizgiye çevirir
+    .replace(/^-+|-+$/g, ''); // Başlangıç ve bitişteki kısa çizgileri temizler
+
 
 const Page: React.FC = () => {
   const [blogs, setBlogs] = useState<IBlogItem[]>([]);
@@ -74,7 +136,8 @@ const Page: React.FC = () => {
   }, [blogs]);
 
   const handleReadMore = (title: string) => {
-    router.push(`/blog/${title}`);
+    const slugifiedTitle = slugify(title);
+    router.push(`/blog/${slugifiedTitle}`);
   };
 
   const handleCategoryClick = (category: string | null) => {
@@ -93,8 +156,60 @@ const Page: React.FC = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  
+
+
   return (
     <div>
+            <Head>
+        <title>Blogs - Omegle: Talk to Strangers!</title>
+        <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
+        <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://omegle-seven.vercel.app/blog" />
+
+        <script
+          id='jsonLdWebSiteId'
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+        <script
+          id='jsonLdOrganizationId'
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          id='jsonLdWebPageId'
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }}
+        />
+        {jsonLdBreadcrumb && (
+          <script
+            id='jsonLdBreadcrumbId'
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+          />
+        )}
+
+        {/* Blog sayfası için SEO bilgileri */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              "blogPost": blogs.map((blog) => ({
+                "@type": "BlogPosting",
+                "headline": blog.title,
+                "image": blog.image,
+               
+                "datePublished": new Date(blog.createdAt).toISOString(),
+                "description": blog ? blog.description.substring(0, 160) : "Omegle is just a great way to Video Chat with Girls, meet new people and have a fun time omegle people.",
+              })),
+            }),
+          }}
+        />
+      </Head>
 
 
       <div>

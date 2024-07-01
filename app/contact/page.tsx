@@ -87,6 +87,8 @@ const Page: React.FC = () => {
       <head>
         <title>Contact Us - Omegle: Talk to strangers!</title>
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="canonical" href="https://omegle-seven.vercel.app/contact"/>
+
         <meta name="description" content="Omegle is a great place to meet new friends..." />
         <meta name="keywords" content="Omegle, chat, meet new people, secure chat, online friends" />
         <meta property="og:title" content="Omegle.com - Omegle: Talk to strangers!" />

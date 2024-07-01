@@ -1,13 +1,14 @@
 "use client";
 
+import Breadcrumb from "@/app/components/breadCrumb/BreadCrumb";
+import Footer from "@/app/components/footer/Footer";
+import Faqs from "@/app/components/home/Faqs";
+import Navbar from "@/app/components/navbar/Navbar";
+import Navbar2 from "@/app/components/navbar2/Navbar2";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Navbar from "./components/navbar/Navbar";
-import Navbar2 from "./components/navbar2/Navbar2";
-import Footer from "./components/footer/Footer";
-import Breadcrumb from "./components/breadCrumb/BreadCrumb";
-import Faqs from "./components/home/Faqs";
 
 interface IFaqItem {
   question: string;
@@ -125,6 +126,11 @@ export default function Home() {
 
   return (
     <>
+    <Head>
+    <title>Omegle - Omegle: Talk to strangers!</title>
+    <link rel="canonical" href="https://omegle-seven.vercel.app"/>
+    
+    </Head>
       <div>
         <script
           type="application/ld+json"

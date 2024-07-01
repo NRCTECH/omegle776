@@ -27,7 +27,12 @@ const Faqs = () => {
     setOpenIndex(openIndex === id ? null : id);
   };
 
+
+
   return (
+      
+    
+
     <div className="mt-12">
       
       <div>

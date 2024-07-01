@@ -52,6 +52,8 @@ const Category = () => {
     <>
       <head>
         <title>{decodedTitle} - Omegle Blog</title>
+        <link rel="canonical" href="https://omegle-seven.vercel.app/category"/>
+
         <meta name="description" content={`Blogs under category ${decodedTitle}`} />
         <meta name="keywords" content={`Omegle, blog, ${decodedTitle}`} />
         <meta name="robots" content="index, follow" />

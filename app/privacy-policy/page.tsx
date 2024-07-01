@@ -33,6 +33,8 @@ const PrivacyPolicy: React.FC = () => {
         <div>
             <head>
                 <title>Privacy Policy - Omegle: Talk to strangers!</title>
+                <link rel="canonical" href="https://omegle-seven.vercel.app/privacy-policy"/>
+
                 <meta name="description" content="Omegle is a great place to meet new friends. When you use Omegle, we pick another user at random and let you have a one-on-one chat with each other." />
             </head>
             <div className="pt-4">
