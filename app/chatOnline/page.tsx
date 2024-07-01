@@ -127,7 +127,7 @@ const Page: React.FC = () => {
           className="w-auto h-auto object-cover mx-auto p-5"
         />
 
-        <button className="flex mx-auto bg-gradient-to-r mt-16 from-blue-400 py-5 px-32 to-blue-600 text-xl text-white animate-bounce font-bold py-2 px-4 rounded-full cursor-pointer hover:from-blue-500 hover:to-blue-700 transition duration-300">
+        <button title='Title' className="flex mx-auto bg-gradient-to-r mt-16 from-blue-400 py-5 px-32 to-blue-600 text-xl text-white animate-bounce font-bold py-2 px-4 rounded-full cursor-pointer hover:from-blue-500 hover:to-blue-700 transition duration-300">
             <Link href={"/ftf"}>Start Video Chat</Link>
         </button> 
 

@@ -44,6 +44,7 @@ const AdminNavbar = () => {
                 {/* Blog Dropdown */}
                 <div className='relative' ref={dropdownRefs.blog}>
                     <button 
+                        title="Title"
                         onClick={() => toggleDropdown(setIsBlogOpen, isBlogOpen)} 
                         className='hover:bg-white cursor-pointer p-2 rounded-lg transition duration-300 flex items-center'
                     >
@@ -73,7 +74,8 @@ const AdminNavbar = () => {
 
                 {/* FAQs Dropdown */}
                 <div className='relative' ref={dropdownRefs.faq}>
-                    <button 
+                    <button
+                    title="Title"
                         onClick={() => toggleDropdown(setIsFaqOpen, isFaqOpen)} 
                         className='hover:bg-white cursor-pointer p-2 rounded-lg transition duration-300 flex items-center'
                     >
@@ -102,7 +104,8 @@ const AdminNavbar = () => {
 
                 {/* Privacy Policy Dropdown */}
                 <div className='relative' ref={dropdownRefs.privacy}>
-                    <button 
+                    <button
+                    title="Title" 
                         onClick={() => toggleDropdown(setIsPrivacyOpen, isPrivacyOpen)} 
                         className='hover:bg-white cursor-pointer p-2 rounded-lg transition duration-300 flex items-center'
                     >
@@ -132,6 +135,7 @@ const AdminNavbar = () => {
                 {/* Terms and Conditions Dropdown */}
                 <div className='relative' ref={dropdownRefs.terms}>
                     <button 
+                    title="Title"
                         onClick={() => toggleDropdown(setIsTermsOpen, isTermsOpen)} 
                         className='hover:bg-white cursor-pointer p-2 rounded-lg transition duration-300 flex items-center'
                     >

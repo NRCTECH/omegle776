@@ -39,6 +39,7 @@ const BlogList: React.FC = () => {
           <div key={blog._id} className='w-full flex justify-between items-center p-4 bg-white rounded shadow'>
             <span>{blog.title}</span>
             <button
+            title="Title"
               onClick={() => router.push(`/admin/blog/${blog._id}`)}
               className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
             >

@@ -159,7 +159,7 @@ export default function Home() {
             <div className="relative w-64 h-fit bg-gray-700 opacity-85 p-4 rounded-lg shadow-lg text-white ">
               <div className="flex justify-between items-center space-x-4">
                 <h2 className="text-md font-bold">Contents</h2>
-                <button
+                <button title='Title'
                   onClick={() => setIsOpen(!isOpen)}
                   className="text-white focus:outline-none hover:text-blue-600"
                 >
@@ -215,7 +215,7 @@ export default function Home() {
             <div className="mt-7 fixed sticky bottom-4 left-0 right-0 absolute">
               <div className="bg-white rounded-lg p-6 w-fit me-auto ms-auto">
                 <div className="font-extrabold text-xl mb-4">Start chatting:</div>
-                <button className="text-2xl text-white py-2 px-44 bg-gradient-to-r from-blue-400 to-blue-600 rounded">
+                <button title='Title' className="text-2xl text-white py-2 px-44 bg-gradient-to-r from-blue-400 to-blue-600 rounded">
                   <Link href={"/ftf"}>Video</Link>
                 </button>
               </div>
@@ -297,7 +297,7 @@ export default function Home() {
             <div className="font-extrabold text-4xl mb-9 mt-14">
               <h1>Talk to Strangers Right Now!</h1>
             </div>
-            <button className="flex mx-auto bg-gradient-to-r mt-16 mb-16 from-blue-400 py-5 px-36 to-blue-600 text-xl text-white animate-bounce font-bold py-2 px-4 rounded-full cursor-pointer hover:from-blue-500 hover:to-blue-700 transition duration-300">
+            <button title='Title' className="flex mx-auto bg-gradient-to-r mt-16 mb-16 from-blue-400 py-5 px-36 to-blue-600 text-xl text-white animate-bounce font-bold py-2 px-4 rounded-full cursor-pointer hover:from-blue-500 hover:to-blue-700 transition duration-300">
               <Link href={"/ftf"}>Start Video Chat</Link>
             </button>
           </div>

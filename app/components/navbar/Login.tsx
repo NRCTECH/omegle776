@@ -24,6 +24,7 @@ const Login = () => {
           </div>
 
           <button
+          title='Title'
             type="button"
             onClick={handleLogout}
             className="bg-orange-500 text-white p-2 rounded-lg"

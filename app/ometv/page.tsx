@@ -119,7 +119,7 @@ const page = () => {
         OmeTV is a cutting-edge social platform that brings people together from all corners of the globe through live video chats. Featuring a user-friendly interface and smooth functionality, OmeTV presents a distinctive opportunity for individuals to connect and forge new friendships online. As a prominent figure in the social networking realm, OmeTV ensures a safe and enjoyable space for users to have meaningful conversations with strangers worldwide. Whether you want to meet new people, practice a foreign language, or just have fun, OmeTV is the premier destination for virtual socializing.        </p>
         
       </div>
-  <button className="bg-gradient-to-r mt-20 from-blue-400 py-5 px-32 to-blue-600 text-xl text-white animate-bounce font-bold py-2 px-4 rounded-full cursor-pointer hover:from-blue-500 hover:to-blue-700 transition duration-300">
+  <button title='Title' className="bg-gradient-to-r mt-20 from-blue-400 py-5 px-32 to-blue-600 text-xl text-white animate-bounce font-bold py-2 px-4 rounded-full cursor-pointer hover:from-blue-500 hover:to-blue-700 transition duration-300">
     <Link href={"/ftf"}>Start Video Chat</Link>
     </button>
 

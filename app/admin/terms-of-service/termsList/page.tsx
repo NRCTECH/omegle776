@@ -115,6 +115,7 @@ const [termsOfServicies, setTermsOfServicies] = useState<ITermsOfService[]>([]);
                     </td>
                     <td className="py-2 px-4 border-b border-gray-200">
                       <button
+                      title='Title'
                         onClick={() => handleEditClick(item)}
 
                         className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2"
@@ -122,6 +123,7 @@ const [termsOfServicies, setTermsOfServicies] = useState<ITermsOfService[]>([]);
                         Edit
                       </button>
                       <button
+                      title='Title'
                         onClick={() => handleDeleteClick(item._id)}
                         className="bg-red-500 text-white px-4 py-2 rounded-lg"
                       >
@@ -177,8 +179,9 @@ const [termsOfServicies, setTermsOfServicies] = useState<ITermsOfService[]>([]);
                     }}
                   />
                 </div>
-              <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg ">Update Privacy Policy Content</button>
+              <button title='Title' type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg ">Update Privacy Policy Content</button>
               <button
+              title='Title'
                 type="button"
                 onClick={() => setIsEditing(null)}
                 className="bg-gray-500 text-white px-4 py-2 rounded-lg ml-2"

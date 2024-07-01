@@ -39,6 +39,7 @@ const Faqs = () => {
         {faqs.map((item) => (
           <div key={item._id} className="py-2">
             <button
+            title='Title'
               className="flex items-center justify-between w-full py-2 px-4 text-left bg-white rounded-t-lg shadow-lg focus:outline-none focus:ring focus:ring-black"
               onClick={() => toggleFaq(item._id)}
             >

@@ -226,6 +226,7 @@ const Page: React.FC = () => {
                 <div className="flex justify-left items-center space-x-4">
                   <h2 className="text-md font-bold">Contents</h2>
                   <button
+                  title='Title'
                     onClick={() => setIsOpen(!isOpen)}
                     className="text-white focus:outline-none hover:text-blue-600"
                   >
@@ -274,7 +275,7 @@ const Page: React.FC = () => {
               {currentBlogs.map((blog) => (
                 <div key={blog._id} className="space-y-4">
                   <h1 className="text-xl font-bold mb-4">
-                    <button onClick={() => handleReadMore(blog.title)}>
+                    <button title='Title' onClick={() => handleReadMore(blog.title)}>
                       {blog.title}
                     </button>
                   </h1>
@@ -295,6 +296,7 @@ const Page: React.FC = () => {
                         }}
                       />
                       <button
+                      title='Title'
                         className="text-blue-600 mt-2 underline"
                         onClick={() => handleReadMore(blog.title)}
                       >
@@ -311,6 +313,7 @@ const Page: React.FC = () => {
                 { length: Math.ceil(filteredBlogs.length / blogsPerPage) },
                 (_, index) => (
                   <button
+                  title='Title'
                     key={index}
                     className={`mb-2 mt-4 mx-1 px-3 py-1 rounded-xl focus:outline-none ${
                       currentPage === index + 1

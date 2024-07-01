@@ -124,6 +124,7 @@ const TermsOfServiceForm = () => {
           
           <div>
             <button
+            title='Title'
               type="submit"
               className="w-full mt-16 bg-indigo-600 text-white py-3 px-6 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700"
             >

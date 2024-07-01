@@ -19,7 +19,7 @@ const Navbar2: React.FC = () => {
     <header className='cursor-pointer mt-14 md:mt-24 w-full bg-gray-700 h-auto md:h-14 flex flex-col md:flex-row items-center justify-between p-4'>
       <div className='w-full flex justify-between md:hidden'>
         {/* Küçük ekran için menü butonunu en sola taşı ve Home butonunu yanına ekle */}
-        <button onClick={toggleMenu} className='text-black focus:outline-none'>
+        <button title='Title' onClick={toggleMenu} className='text-black focus:outline-none'>
           <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}></path>
           </svg>
