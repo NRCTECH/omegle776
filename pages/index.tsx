@@ -3,7 +3,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumb from "./components/breadCrumb/BreadCrumb";
 import Navbar from "./components/navbar/Navbar";
 import Navbar2 from "./components/navbar2/Navbar2";
@@ -13,43 +13,22 @@ import Footer from "./components/footer/Footer";
 interface IFaqItem {
   question: string;
   answer: string;
+  blogId?: string
+}
+interface HomeProps {
+  faqs : IFaqItem[];
 }
 
-export default function Home() {
+const Home : React.FC<HomeProps> = ({faqs})=> {
   const router = useRouter();
   const handleClick = () => {
     router.push('/ftf');
   };
 
-  const [faqs, setFaqs] = useState<IFaqItem[]>([]);
   const [faqJsonLd, setFaqJsonLd] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
 
-  useEffect(() => {
-    const fetchFaqs = async () => {
-      const res = await fetch("/api/faqs");
-      const data = await res.json();
-      setFaqs(data);
-
-      const generatedFaqJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": data.map((faq: IFaqItem) => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer,
-          },
-        })),
-      };
-
-      setFaqJsonLd(JSON.stringify(generatedFaqJsonLd));
-    };
-
-    fetchFaqs();
-  }, []);
 
   useEffect(() => {
     // Başlıkları toplamak ve id eklemek
@@ -123,7 +102,18 @@ export default function Home() {
       }
     ]
   };
-
+  const jsonLdFaqs = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  } : null;
   return (
     <>
     <Head>
@@ -147,6 +137,11 @@ export default function Home() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+        />
+        <script
+        id="jsonLdFaqId"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaqs) }}
         />
 
         <div className="bg-orange-100 flex flex-col text-black">
@@ -295,3 +290,16 @@ export default function Home() {
     </>
   );
 }
+export const getServerSideProps = async () => {
+  const res = await fetch('https://omegle-mu.vercel.app/api/faqs');
+  const data = await res.json();
+  const faqs = data.filter((faq: IFaqItem) => !faq.blogId);
+  
+  return {
+    props: {
+      faqs,
+    },
+  };
+};
+
+export default Home;
